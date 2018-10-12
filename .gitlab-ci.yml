@@ -7,7 +7,8 @@ build:
   # All available Hugo versions are listed here: https://gitlab.com/pages/hugo/container_registry
   image: registry.gitlab.com/pages/hugo:latest
   before_script:
-  - snap install hugo --channel=extended
+  - snap refresh hugo --channel=extended
+  # - snap install hugo --channel=extended
   script:
   - hugo
   artifacts:
