@@ -1,0 +1,72 @@
+baseURL = "https://facer2vm.org/"
+languageCode = "en"
+title = "FACER2VM"
+theme = "gohugo-theme-wumpus"
+
+copyright = "© 2018 FACER2VM"
+defaultContentLanguage = "en"
+paginate = 10
+summaryLength = 35
+#rssLimit = 15
+
+#googleAnalytics = "UA-127414679-1"
+
+[taxonomies]
+  company = "companies"
+  people = "people"
+  group = "groups"
+  tag = "tags"
+
+
+[params]
+  description = "Face Matching for Automatic Identity Retrieval, Recognition, Verification and Management"
+  #favicon = "this.png"
+  feature_image = "/images/masthead-dark.jpg"
+
+
+[languages]
+  [languages.en]
+    languageName = "English"
+    weight = 1
+
+
+[menu]
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "Publications"
+    url = "/tags/publications/"
+    weight = 2
+  [[menu.main]]
+    name = "Invited talks"
+    url = "/tags/invited-talks/"
+    weight = 3
+  [[menu.main]]
+    name = "In the news"
+    url = "/tags/in-the-news/"
+    weight = 4
+  [[menu.main]]
+    name = "Software"
+    url = "/tags/software/"
+    weight = 5
+
+
+[privacy]
+  [privacy.disqus]
+    disable = true
+  [privacy.googleAnalytics]
+    anonymizeIP = true
+    respectDoNotTrack = true
+    useSessionStorage = true
+  [privacy.twitter]
+    enableDNT = true
+    simple = true
+  [privacy.youtube]
+    privacyEnhanced = true
+
+
+[services]
+  [services.twitter]
+    disableInlineCSS = true
