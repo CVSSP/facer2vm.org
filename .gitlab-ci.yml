@@ -8,7 +8,7 @@ variables:
   GIT_SUBMODULE_STRATEGY: recursive
 
 
-build:
+pages:
   script:
   - hugo --gc --minify
   artifacts:
@@ -17,12 +17,3 @@ build:
   only:
   - master
   stage: build
-
-
-pages:
-  artifacts:
-    paths:
-    - public
-  only:
-  - master
-  stage: deploy
