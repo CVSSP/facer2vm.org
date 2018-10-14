@@ -5,7 +5,7 @@ variables:
 build:
   # All available Hugo versions are listed here: https://gitlab.com/pages/hugo/container_registry
   # image: registry.gitlab.com/pages/hugo:latest
-  image: klakegg/hugo:ext-alpine
+  image: cibuilds/hugo
   before_script:
   # - snap refresh hugo --channel=extended
   # - snap install hugo --channel=extended
