@@ -1,13 +1,13 @@
-
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
 
 
 build:
   # All available Hugo versions are listed here: https://gitlab.com/pages/hugo/container_registry
-  image: registry.gitlab.com/pages/hugo:latest
+  # image: registry.gitlab.com/pages/hugo:latest
+  image: hub.docker.com/klakegg/hugo:ext-alpine
   before_script:
-  - snap refresh hugo --channel=extended
+  # - snap refresh hugo --channel=extended
   # - snap install hugo --channel=extended
   script:
   - hugo
