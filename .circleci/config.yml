@@ -1,0 +1,49 @@
+version: 2.1
+
+executor:
+  hugo-ext:
+    docker:
+    - image: dettmering/hugo-build
+    # cibuilds/hugo          <-- includes hugo extended functionality.
+    # dettmering/hugo-build  <-- does too, but is 1/5th of the size.
+    environment:
+      HUGO_ENV: production
+    branches:
+      only: master
+
+
+jobs:
+  build:
+    executor: hugo-ext
+    steps:
+    - persist_to_workspace:
+      root: /tmp/workspace
+      paths:
+      - public
+    - checkout
+    - run: hugo --gc --minify -d /tmp/workspace/public
+    
+  deploy-to-gh-pages:
+    executor: hugo-ext
+    steps:
+    - add_ssh_keys:
+      fingerprint: .....
+    - run: git config --global user.name "Paul Koppen"
+    - run: git config --global user.email "p.koppen@surrey.ac.uk"
+    - run: `git clone -b gh_pages --single-branch git@github.com:CVSSP/facer2vm.org.git public`
+    - attach_workspace:
+      at: /tmp/workspace
+    - run: `cp -R /tmp/workspace/public/* .`
+    - run: git add .
+    - run: git commit -m "Pushed from build."
+    - run: git push
+
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+    - build
+    - deploy-to-gh-pages
+      requires:
+      - build
