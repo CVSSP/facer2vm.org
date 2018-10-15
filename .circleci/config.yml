@@ -23,9 +23,8 @@ jobs:
     - run: git checkout gh-pages
     - run: git clean -df .
     - run: git rm -rf --ignore-unmatch *
+    - run: git rm -rg --ignore-unmatch .circleci
     - run: mv /tmp/public/* .
-    - run: ls -la /tmp/public
-    - run: ls -la .
     - run: mv /tmp/public/.circleci .
     - run: git add .
     - run: git commit -m "Automated website build."
