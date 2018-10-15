@@ -1,0 +1,1 @@
+{{ with index . 0 }}{{ i18n (printf "Count%s" (.Type | title)) (len $) }}{{ end }}

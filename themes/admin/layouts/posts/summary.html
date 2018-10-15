@@ -1,0 +1,14 @@
+      <article class="{{ partial "content-class.html" . }} summary">
+        <header>
+          <h2 class="title"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+        </header>
+        <section class="meta">
+          {{ if .Params.people }}{{- partial "taxonomy-links.html" (dict "Site" .Site "Params" .Params "taxonomy" "people") -}}{{ end }}
+          {{ if .Params.tags }}{{ i18n "On" }} {{- partial "taxonomy-links.html" (dict "Site" .Site "Params" .Params "taxonomy" "tags" "template" "link") -}}{{ end }}
+          <span class="divider">|</span>
+          <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 Jan 2006"}}</time>
+        </section>
+        <blockquote class="excerpt" cite=".RelPermalink">
+          <p>{{ .Description | default (.Summary | truncate 220) }}
+        </blockquote>
+      </article>
