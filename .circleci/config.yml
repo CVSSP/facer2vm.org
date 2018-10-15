@@ -27,13 +27,13 @@ jobs:
     executor: hugo-ext
     steps:
     - add_ssh_keys:
-      fingerprint: .....
+      fingerprint: dd:d9:48:de:fd:a8:82:5e:d2:ba:9e:95:00:1a:1f:1e
     - run: git config --global user.name "Paul Koppen"
     - run: git config --global user.email "p.koppen@surrey.ac.uk"
-    - run: `git clone -b gh_pages --single-branch git@github.com:CVSSP/facer2vm.org.git public`
+    - run: git clone -b gh_pages --single-branch git@github.com:CVSSP/facer2vm.org.git public
     - attach_workspace:
       at: /tmp/workspace
-    - run: `cp -R /tmp/workspace/public/* .`
+    - run: cp -R /tmp/workspace/public/* .
     - run: git add .
     - run: git commit -m "Pushed from build."
     - run: git push
