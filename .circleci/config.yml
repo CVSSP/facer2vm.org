@@ -2,49 +2,28 @@ version: 2.1
 
 
 jobs:
-  build:
+  build_and_deploy_to_gh_pages:
     docker:
     - image: cibuilds/hugo:latest
     environment:
       HUGO_ENV: production
-    steps:
-    - checkout
-    - run:
-        name: Build the web pages.
-        command: hugo --gc --minify -d /tmp/public
-    - persist_to_workspace:
-        root: /tmp
-        paths:
-        - public
-
-  deploy_to_gh_pages:
-    docker:
-    - image: cibuilds/hugo:latest
     steps:
     - add_ssh_keys:
         fingerprint: dd:d9:48:de:fd:a8:82:5e:d2:ba:9e:95:00:1a:1f:1e
     - run: git config --global user.name "Paul Koppen"
     - run: git config --global user.email "p.koppen@surrey.ac.uk"
     - checkout
-    - run: git checkout --orphan gh-pages
-    - run: git rm -rf .
-    - run: git clean -df
-    - attach_workspace:
-        at: /tmp
-    - run: mv /tmp/public/* .
-    - run: git add .
-    - run: git commit -m "Pushed from build."
-    - run: git push
+    - run:
+        name: Build the web pages.
+        command: hugo --gc --minify -d public
+    - git add public
+    - git commit -m "Automatic website build."
+    - git subtree push --prefix public origin gh-pages
+    - git push origin master
 
 
 workflows:
   version: 2
   build_and_deploy:
     jobs:
-    - build
-    - deploy_to_gh_pages:
-        requires:
-        - build
-        filters:
-          branches:
-            only: master
+    - build_and_deploy_to_gh_pages
