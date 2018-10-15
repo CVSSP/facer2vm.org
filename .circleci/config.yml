@@ -4,7 +4,7 @@ version: 2.1
 jobs:
   build:
     docker:
-    - image: circleci/hugo:latest
+    - image: cibuilds/hugo:latest
     environment:
       HUGO_ENV: production
     steps:
@@ -19,7 +19,7 @@ jobs:
 
   deploy_to_gh_pages:
     docker:
-    - image: circleci/hugo:latest
+    - image: cibuilds/hugo:latest
     steps:
     - add_ssh_keys:
         fingerprint: dd:d9:48:de:fd:a8:82:5e:d2:ba:9e:95:00:1a:1f:1e
