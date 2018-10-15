@@ -35,9 +35,9 @@ jobs:
     - run: git rm -rf *
     - attach_workspace:
         at: /tmp
-    run: mv /tmp/public/* .
-    run: git commit -am "Automated website build."
-    run: git push
+    - run: mv /tmp/public/* .
+    - run: git commit -am "Automated website build."
+    - run: git push
 
 
 workflows:
