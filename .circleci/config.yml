@@ -2,39 +2,22 @@ version: 2.1
 
 
 jobs:
-  build:
+  build_and_deploy_to_gh_pages:
     docker:
     - image: cibuilds/hugo:latest
     environment:
       HUGO_ENV: production
     steps:
-    - checkout
-    - run:
-        name: Build the web pages.
-        command: hugo --gc --minify -d /tmp/public
-    - persist_to_workspace:
-        root: /tmp
-        paths:
-        - public
-
-  deploy_to_gh_pages:
-    docker:
-    - image: cibuilds/hugo:latest
-    environment:
-      HUGO_ENV: production
-    steps:
-    - run:
-        name: Add Github key to known hosts.
-        command: mkdir -p ~/.ssh && echo 'github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==' >> ~/.ssh/known_hosts
     - add_ssh_keys:
         fingerprint: dd:d9:48:de:fd:a8:82:5e:d2:ba:9e:95:00:1a:1f:1e
     - run: git config --global user.name "Paul Koppen"
     - run: git config --global user.email "p.koppen@surrey.ac.uk"
-    #- checkout
-    - run: git clone -b gh-pages --single-branch git@github.com:CVSSP/facer2vm.org.git .
+    - checkout
+    - run:
+        name: Build the web pages.
+        command: hugo --gc --minify -d /tmp/public
+    - run: git checkout gh-pages
     - run: git rm -rf *
-    - attach_workspace:
-        at: /tmp
     - run: mv /tmp/public/* .
     - run: git commit -am "Automated website build."
     - run: git push
@@ -44,10 +27,7 @@ workflows:
   version: 2
   build_and_deploy:
     jobs:
-    - build
-    - deploy_to_gh_pages:
-        requires:
-        - build
+    - build_and_deploy_to_gh_pages:
         filters:
           branches:
             only: master
