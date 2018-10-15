@@ -16,10 +16,10 @@ jobs:
     - run:
         name: Build the web pages.
         command: hugo --gc --minify -d public
-    - git add public
-    - git commit -m "Automatic website build."
-    - git subtree push --prefix public origin gh-pages
-    - git push origin master
+    - run: git add public
+    - run: git commit -m "Automatic website build."
+    - run: git subtree push --prefix public origin gh-pages
+    - run: git push origin master
 
 
 workflows:
