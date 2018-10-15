@@ -8,11 +8,11 @@ jobs:
     environment:
       HUGO_ENV: production
     steps:
+    - checkout
     - add_ssh_keys:
-        fingerprint: dd:d9:48:de:fd:a8:82:5e:d2:ba:9e:95:00:1a:1f:1e
+        fingerprint: 60:61:5b:d0:03:dc:d6:61:9f:ff:4a:83:6b:5e:c1:6f
     - run: git config --global user.name "Paul Koppen"
     - run: git config --global user.email "p.koppen@surrey.ac.uk"
-    - checkout
     - run:
         name: Build the web pages.
         command: hugo --gc --minify -d /tmp/public
