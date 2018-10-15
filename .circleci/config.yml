@@ -17,6 +17,7 @@ jobs:
         name: Build the web pages.
         command: hugo --gc --minify -d /tmp/public
     - run: git checkout gh-pages
+    - run: git clean -df .
     - run: git rm -rf *
     - run: mv /tmp/public/* .
     - run: git commit -am "Automated website build."
