@@ -24,7 +24,7 @@ jobs:
     - run: git clean -df .
     - run: git rm -rf --ignore-unmatch *
     - run: mv /tmp/public/* .
-    - run: mv /tmp/public/.circleci/ .
+    - run: mv /tmp/public/.circleci ./
     - run: git add .
     - run: git commit -m "Automated website build."
     - run: git push
