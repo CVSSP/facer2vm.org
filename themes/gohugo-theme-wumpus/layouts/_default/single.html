@@ -1,0 +1,19 @@
+{{ define "header" }}
+  <h1 class="title">{{ .Title }}</h1>
+{{ end }}
+
+
+{{ define "main" }}
+	<article class="{{ partial "content-class.html" . }} main">
+    <section class="content">
+      {{ .Content }}
+    </section>
+
+    <section class="info">
+      <aside class="tags">
+        {{- partial "taxonomy-links.html" (dict "Site" .Site "Params" .Params "taxonomy" "tags" "separator" " ") -}}
+      </aside>
+      <div class="clear"></div>
+    </section>
+	</article>
+{{ end }}

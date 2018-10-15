@@ -1,0 +1,170 @@
+{{- $production := not .Site.IsServer -}}
+<!DOCTYPE html>
+<html lang="{{ $.Site.LanguageCode | default "en" }}">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>{{ block "title" . }}{{ .Site.Title }}{{ with .Params.Title }} | {{ . }}{{ end }}{{ end }}</title>
+  {{- with cond .IsHome .Site.Params.Description .Description }}
+  <meta name="description" content="{{ . }}">
+  {{- end }}
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  {{- if $production }}
+    {{- /* Combine all resources into one. */}}
+    {{- $options := (dict "outputStyle" "compressed" "enableSourceMap" 0) }}
+    {{- $css := resources.Get "assets/sass/wumpus.scss" | resources.ToCSS $options | slice }}
+    {{- range .Site.Data.assets.scss }}
+      {{- $css = $css | append (resources.Get . | resources.ToCSS $options | slice) }}
+    {{- end }}
+    {{- $style := $css | resources.Concat "assets/css/style.css" | fingerprint }}
+  <link rel="stylesheet" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}">
+  {{- else }}
+    {{- /* Spell out the resources separately, with nice formatting. */}}
+    {{- $options := (dict "outputStyle" "expanded" "enableSourceMap" 1) }}
+    {{- $style := resources.Get "assets/sass/wumpus.scss" | resources.ToCSS $options | fingerprint }}
+  <link rel="stylesheet" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}">
+    {{- range .Site.Data.assets.scss }}
+      {{- $style := resources.Get . | resources.ToCSS $options | fingerprint }}
+  <link rel="stylesheet" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}">
+    {{- end }}
+  {{- end }}
+
+  {{- with .Site.Params.favicon }}
+  <link rel="shortcut icon" href="/{{ . }}" type="image/x-icon">
+  {{- end }}
+  {{- with .Permalink }}
+  <link rel="canonical" href="{{ . }}">
+  {{- end }}
+  {{- if .RSSLink }}
+  <link rel="alternate" href="{{ .RSSLink }}" type="application/rss+xml" title="{{ .Site.Title }}">
+  <link rel="feed" href="{{ .RSSLink }}" type="application/rss+xml" title="{{ .Site.Title }}">
+  {{- end }}
+
+  {{- /* NOTE: These Hugo Internal Templates can be found starting at https://github.com/spf13/hugo/blob/master/tpl/tplimpl/template_embedded.go#L158 */}}
+  {{- template "_internal/opengraph.html" . -}}
+  {{- template "_internal/google_news.html" . -}}
+  {{- template "_internal/schema.html" . -}}
+  {{- template "_internal/twitter_cards.html" . -}}
+
+  <meta name="referrer" content="no-referrer-when-downgrade">
+  {{ .Hugo.Generator }}
+  {{- if $production }}
+  <meta name="robots" content="index, follow">
+  {{- template "_internal/google_analytics_async.html" . -}}
+  {{- else }}
+  <meta name="robots" content="noindex, nofollow">
+  {{- end }}
+</head>
+<body class="{{ partial "content-class.html" . }}{{ if $production }} production{{ else }} dev{{ end }}">
+
+<div id="wrapper">
+
+  {{- /*    Page header
+       * ==============
+       */}}
+  <header id="header" class="{{ partial "content-class.html" . }}"{{ with (cond .IsHome .Site.Params.feature_image .Params.feature_image) }} style="background-image: url('{{ . }}');"{{ end }}>
+    {{- /*
+         *    Header customisation
+         * =======================
+         */}}
+    {{- block "header" . }}
+      <h1 class="title">{{ .Title }}</h1>
+      <div class="description">{{ with (cond .IsHome .Site.Params.description .Description) }}{{ . }}{{ end }}</div>
+    {{- end }}
+  </header>
+
+  {{- /*  Main content
+       * ===============
+       */}}
+  <main id="main">
+    <div class="speed_up_rendering">
+      {{- block "main" . }}
+        {{- with .Content }}
+      <article class="{{ partial "content-class.html" $ }} main">
+        <section class="content">{{ . }}</section>
+      </article>
+        {{- end }}
+      {{- end }}
+    </div>
+  </main>
+
+  {{- /*    Site footer
+       * ==============
+       */}}
+  <footer id="footer" role="contentinfo">
+    <div class="line_over">
+      {{- block "footer" . }}
+      <section class="credits">
+        <span class="copyright"><a href="{{ .Site.BaseURL }}">{{ with .Site.Copyright }}{{ . }}{{ else }}&copy; {{ now.Format "2006" }} {{ .Site.Title }}{{ end }}</a></span>
+        <span class="theme">{{ i18n "Theme" }} <a href="//github.com/zutrinken/attila">Attila</a> {{ i18n "By" }} <a href="//zutrinken.com" rel="nofollow">zutrinken</a></span>
+        <span class="software">{{ i18n "PublishedWith"}} <a href="//gohugo.io/">Hugo</a></span>
+      </section>
+      {{- end }}
+    </div>
+  </footer>
+
+  <label class="hidden-close" for="menu-switch"></label>
+</div>
+
+{{- /*    Navigation buttons
+     * =====================
+     */}}
+<nav id="nav-buttons">
+  {{- with .Site.Params.logo }}
+  <a id="home-button" class="nav-button logo" href="{{ .Site.BaseURL }}"><img src="{{ . }}" alt="{{ i18n "Blog Logo" }}"></a>
+  {{- else}}
+    {{- if not .IsHome }}
+  <a id="home-button" class="nav-button button" href="{{ .Site.BaseURL }}"><i class="ic ic-arrow-left"></i> {{ i18n "Home" }}</a></span>
+    {{- end }}
+  {{- end }}
+
+  {{- if .Site.Menus.main }}
+  <label  id="menu-button" class="nav-button button" for="menu-switch"><i class="ic ic-menu"></i> {{ i18n "Menu" }}</label>
+  {{- end }}
+</nav>
+
+{{- /*    Site navigation
+     * ==================
+     */}}
+<nav id="menu">
+  <p class="nav-label">{{i18n "Menu"}}</p>
+  <ul>
+    {{- range .Site.Menus.main }}
+    <li class="nav-{{ replace (trim .URL "/") "/" "_" | urlize }}{{if or ($.Page.IsMenuCurrent "main" .) ($.Page.HasMenuCurrent "main" .) }} active{{end}}" role="presentation"><a href="{{ .URL }}">{{ .Pre }} <span>{{ .Name }}</span></a></li>
+    {{- end }}
+    {{- with .Site.Param "twitter" }}
+    <li class="nav-twitter"><a href="//twitter.com/{{ . | urlize }}" title="{{ . }}"><i class="ic ic-twitter"></i> Twitter</a></li>
+    {{- end }}
+    {{- with .Site.Param "facebook" }}
+    <li class="nav-facebook"><a href="//facebook.com/{{ . | urlize }}" title="{{ . }}"><i class="ic ic-facebook"></i> Facebook</a></li>
+    {{- end }}
+    {{- with .Site.Param "instagram" }}
+    <li class="nav-instagram"><a href="//instagram.com/{{ . | urlize }}" title="{{ . }}"><i class="ic ic-instagram"></i> Instagram</a></li>
+    {{- end }}
+    {{- with .Site.Param "github" }}
+    <li class="nav-github"><a href="//github.com/{{ . | urlize }}" title="{{ . }}"><i class="ic ic-github"></i> Github</a></li>
+    {{- end }}
+    {{- with .Site.RSSLink }}
+    <li class="nav-rss"><a href="{{ . }}"><i class="ic ic-rss"></i> {{ i18n "Subscribe" }}</a></li>
+    {{- end }}
+  </ul>
+  <label for="menu-switch" class="close-button button">{{i18n "Close"}}</label>
+  <input type="checkbox" id="menu-switch" value="open" tabindex="-1" role="switch">
+</nav>
+
+{{- /*    Site scripts
+     * ===============
+     */}}
+{{- $highlight := resources.Get "assets/js/libs/highlight.pack.js" }}
+{{- $fitvids := resources.Get "assets/js/libs/jquery.fitvids.js" }}
+{{- $history := resources.Get "assets/js/libs/jquery.history.js" }}
+{{- $jquery := resources.Get "assets/js/libs/jquery-1.11.3.min.js" }}
+{{- $wumpus := resources.Get "assets/js/wumpus.js" }}
+{{- $script := slice $jquery $highlight $fitvids $history $wumpus | resources.Concat "assets/js/script.js" | fingerprint }}
+<script type="text/javascript" src="{{ $script.Permalink }}" integrity="{{ $script.Data.Integrity }}"></script>
+</body>
+</html>

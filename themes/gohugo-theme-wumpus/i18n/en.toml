@@ -1,0 +1,91 @@
+[And]
+other = " and "
+
+[BlogLogo]
+other = "Blog Logo"
+
+[By]
+other = "by"
+
+[Close]
+other = "Close"
+
+[CountCompanies]
+one = "{{.Count}} company"
+other = "{{.Count}} companies"
+
+[CountGroups]
+one = "{{.Count}} group"
+other = "{{.Count}} groups"
+
+[CountItems]
+one = "{{.Count}} item"
+other = "{{.Count}} items"
+
+[CountMembers]
+one = "{{.Count}} member"
+other = "{{.Count}} members"
+
+[CountPeople]
+one = "{{.Count}} person"
+other = "{{.Count}} people"
+
+[CountPosts]
+one = "{{.Count}} post"
+other = "{{.Count}} posts"
+
+[CountTags]
+one = "{{.Count}} tag"
+other = "{{.Count}} tags"
+
+[GetTheLatestPosts]
+other = "Get the latest posts delivered right to your inbox."
+
+[Home]
+other = "Home"
+
+[Menu]
+other = "Menu"
+
+[Next]
+other = "Next"
+
+[NoPosts]
+other = "No Posts"
+
+[On]
+other = " on "
+
+[PageOf]
+other = "Page {{.PageNumber}} of {{.TotalPages}}"
+
+[Post]
+one = "{{.Count}} Post"
+other = "{{.Count}} Posts"
+
+[Posts]
+other = "Posts"
+
+[Previous]
+other = "Previous"
+
+[PublishedWith]
+other = "Published with"
+
+[ShowComments]
+other = "Show Comments"
+
+[Subscribe]
+other = "Subscribe"
+
+[Theme]
+other = "Theme"
+
+[ThisPostWasACollaboration]
+other = "This post was a collaboration between:"
+
+[Website]
+other = "Website"
+
+[YourEmailAddress]
+other = "Your email address"
