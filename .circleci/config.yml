@@ -44,6 +44,6 @@ workflows:
   build-deploy:
     jobs:
     - build
-    - deploy-to-gh-pages
+    - deploy-to-gh-pages:
       requires:
       - build
