@@ -19,7 +19,7 @@ jobs:
     - run:
         name: Build the web pages.
         command: hugo --gc --minify -d /tmp/public
-    - run: cp -r .circleci /tmp/public/
+    - run: cp -R .circleci /tmp/public/
     - run: git checkout gh-pages
     - run: git clean -df .
     - run: git rm -rf --ignore-unmatch *
