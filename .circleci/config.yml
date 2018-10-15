@@ -1,0 +1,30 @@
+version: 2.0
+
+
+jobs:
+  build:
+  # ... and deploy to Github pages.
+    branches:
+      only: master
+    docker:
+    - image: cibuilds/hugo:latest
+    environment:
+      HUGO_ENV: production
+    steps:
+    - checkout
+    - add_ssh_keys:
+        fingerprint: 60:61:5b:d0:03:dc:d6:61:9f:ff:4a:83:6b:5e:c1:6f
+    - run: git config --global user.name "Paul Koppen"
+    - run: git config --global user.email "p.koppen@surrey.ac.uk"
+    - run:
+        name: Build the web pages.
+        command: hugo --gc --minify -d /tmp/public
+    - run: cp -r .circleci /tmp/public/
+    - run: git checkout gh-pages
+    - run: git clean -df .
+    - run: git rm -rf --ignore-unmatch *
+    - run: mv /tmp/public/* .
+    - run: mv /tmp/public/.circleci .
+    - run: git add .
+    - run: git commit -m "Automated website build."
+    - run: git push
