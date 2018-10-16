@@ -562,8 +562,10 @@ body {
         padding-top: 0.7rem;
         padding-bottom: 0.7rem;
 
-        & > span {
+        & > * {
             flex: 1 1 30%;
+            margin-bottom: 0;
+            margin-top: 0;
             opacity: 0.5;
         }
 

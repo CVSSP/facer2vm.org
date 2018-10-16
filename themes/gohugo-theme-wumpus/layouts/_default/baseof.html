@@ -107,13 +107,13 @@ schema.org/
        * ==============
        */}}
   <footer id="footer">
-    <div>{{/* Do not remove div. It controls .credits.border-top. */}}
+    <div>{{/* Do not remove div. It controls .credits{border-top}. */}}
       {{- block "footer" . }}
-      <section class="credits">
-        <span class="copyright"><a href="{{ .Site.BaseURL }}">{{ with .Site.Copyright }}{{ . }}{{ else }}&copy; {{ now.Format "2006" }} {{ .Site.Title }}{{ end }}</a></span>
-        <!--span class="theme">{{ i18n "Theme" }} <a href="//gitlab.com/wpk-/gohugo-theme-wumpus">Wumpus</a> {{ i18n "By" }} <a href="//paulkoppen.com/" rel="nofollow">Paul Koppen</a></span-->
-        <span class="software">{{ i18n "PublishedWith"}} <a href="//gohugo.io/">Hugo</a></span>
-      </section>
+      <div class="credits">
+        <p class="copyright"><a href="{{ .Site.BaseURL }}">{{ with .Site.Copyright }}{{ . }}{{ else }}&copy; {{ now.Format "2006" }} {{ .Site.Title }}{{ end }}</a>
+        <!--p class="theme">{{ i18n "Theme" }} <a href="//gitlab.com/wpk-/gohugo-theme-wumpus">Wumpus</a> {{ i18n "By" }} <a href="//paulkoppen.com/" rel="nofollow">Paul Koppen</a>-->
+        <p class="software">{{ i18n "PublishedWith"}} <a href="//gohugo.io/">Hugo</a>
+      </div>
       {{- end }}
     </div>
   </footer>
