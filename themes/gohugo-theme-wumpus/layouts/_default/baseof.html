@@ -1,6 +1,6 @@
 {{- $production := not .Site.IsServer -}}
 <!DOCTYPE html>
-<html lang="{{ $.Site.LanguageCode | default "en" }}" itemscope itemtype="//schema.org/{{ .Param "itemtype" | default "BlogPosting" }}">
+<html lang="{{ $.Site.LanguageCode | default "en" }}" itemscope itemtype="https://schema.org/{{ .Param "itemtype" | default "BlogPosting" }}">
 {{- /*
 schema.org/
     PublicationEvent
