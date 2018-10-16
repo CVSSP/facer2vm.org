@@ -107,7 +107,7 @@ schema.org/
        * ==============
        */}}
   <footer id="footer">
-    <div class="line_over">
+    <div>{{/* Do not remove div. It controls .credits.border-top. */}}
       {{- block "footer" . }}
       <section class="credits">
         <span class="copyright"><a href="{{ .Site.BaseURL }}">{{ with .Site.Copyright }}{{ . }}{{ else }}&copy; {{ now.Format "2006" }} {{ .Site.Title }}{{ end }}</a></span>
