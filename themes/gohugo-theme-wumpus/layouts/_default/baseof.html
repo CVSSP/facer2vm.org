@@ -106,12 +106,12 @@ schema.org/
   {{- /*    Site footer
        * ==============
        */}}
-  <footer id="footer" role="contentinfo">
+  <footer id="footer">
     <div class="line_over">
       {{- block "footer" . }}
       <section class="credits">
         <span class="copyright"><a href="{{ .Site.BaseURL }}">{{ with .Site.Copyright }}{{ . }}{{ else }}&copy; {{ now.Format "2006" }} {{ .Site.Title }}{{ end }}</a></span>
-        <span class="theme">{{ i18n "Theme" }} <a href="//github.com/zutrinken/attila">Attila</a> {{ i18n "By" }} <a href="//zutrinken.com" rel="nofollow">zutrinken</a></span>
+        <!--span class="theme">{{ i18n "Theme" }} <a href="//gitlab.com/wpk-/gohugo-theme-wumpus">Wumpus</a> {{ i18n "By" }} <a href="//paulkoppen.com/" rel="nofollow">Paul Koppen</a></span-->
         <span class="software">{{ i18n "PublishedWith"}} <a href="//gohugo.io/">Hugo</a></span>
       </section>
       {{- end }}

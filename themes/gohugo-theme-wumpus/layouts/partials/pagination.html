@@ -1,5 +1,5 @@
 {{- /* The context must be a .Paginator object. */}}
-      <nav class="pagination" role="navigation">
+      <nav class="pagination">
         <div class="left">{{ with .Prev }}<a class="button previous" href="{{ .URL }}"><i class="ic ic-arrow-left"></i> {{ i18n "Previous" }}</a>{{ end }}</div>
         <div class="info">{{ i18n "PageOf" . }}</div>
         <div class="right">{{ with .Next }}<a class="button next" href="{{ .URL }}">{{ i18n "Next" }} <i class="ic ic-arrow-right"></i></a>{{ end }}</div>

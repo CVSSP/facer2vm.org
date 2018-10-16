@@ -571,8 +571,9 @@ body {
             order: 1;
         }
         .copyright {
+            flex: 0 0;
             order: 2;
-            text-align: center;
+            white-space: nowrap;
         }
         .software {
             order: 3;
