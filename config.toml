@@ -1,7 +1,7 @@
 baseURL = "https://facer2vm.org/"
 languageCode = "en"
 title = "FACER2VM"
-#theme = "gohugo-theme-wumpus"
+theme = "gohugo-theme-wumpus"
 
 copyright = "© 2018 FACER2VM"
 defaultContentLanguage = "en"
