@@ -1,4 +1,4 @@
-![Build Status](https://gitlab.com/facer2vm/facer2vm.org/badges/master/build.svg)
+[![CircleCI](https://circleci.com/gh/CVSSP/facer2vm.org.svg?style=svg)](https://circleci.com/gh/CVSSP/facer2vm.org)
 
 ---
 

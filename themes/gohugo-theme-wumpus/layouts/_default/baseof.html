@@ -1,9 +1,21 @@
 {{- $production := not .Site.IsServer -}}
 <!DOCTYPE html>
-<html lang="{{ $.Site.LanguageCode | default "en" }}">
+<html lang="{{ $.Site.LanguageCode | default "en" }}" itemscope itemtype="//schema.org/{{ .Param "itemtype" | default "BlogPosting" }}">
+{{- /*
+schema.org/
+    PublicationEvent
+    Organization
+    Person
+    SoftwareApplication
+    Article
+    ScholarlyArticle
+    NewsArticle
+    BlogPosting
+    WebPage
+*/}}
 <head>
   <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
   <title>{{ block "title" . }}{{ .Site.Title }}{{ with .Params.Title }} | {{ . }}{{ end }}{{ end }}</title>
   {{- with cond .IsHome .Site.Params.Description .Description }}
@@ -41,7 +53,6 @@
   {{- end }}
   {{- if .RSSLink }}
   <link rel="alternate" href="{{ .RSSLink }}" type="application/rss+xml" title="{{ .Site.Title }}">
-  <link rel="feed" href="{{ .RSSLink }}" type="application/rss+xml" title="{{ .Site.Title }}">
   {{- end }}
 
   {{- /* NOTE: These Hugo Internal Templates can be found starting at https://github.com/spf13/hugo/blob/master/tpl/tplimpl/template_embedded.go#L158 */}}
@@ -149,11 +160,11 @@
     <li class="nav-github"><a href="//github.com/{{ . | urlize }}" title="{{ . }}"><i class="ic ic-github"></i> Github</a></li>
     {{- end }}
     {{- with .Site.RSSLink }}
-    <li class="nav-rss"><a href="{{ . }}"><i class="ic ic-rss"></i> {{ i18n "Subscribe" }}</a></li>
+    <li class="nav-rss"><a rel="alternate" type="application/rss+xml" href="{{ . }}"><i class="ic ic-rss"></i> {{ i18n "Subscribe" }}</a></li>
     {{- end }}
   </ul>
   <label for="menu-switch" class="close-button button">{{i18n "Close"}}</label>
-  <input type="checkbox" id="menu-switch" value="open" tabindex="-1" role="switch">
+  <input type="checkbox" id="menu-switch" value="open" tabindex="-1" role="switch" aria-checked="false">
 </nav>
 
 {{- /*    Site scripts
@@ -165,6 +176,6 @@
 {{- $jquery := resources.Get "assets/js/libs/jquery-1.11.3.min.js" }}
 {{- $wumpus := resources.Get "assets/js/wumpus.js" }}
 {{- $script := slice $jquery $highlight $fitvids $history $wumpus | resources.Concat "assets/js/script.js" | fingerprint }}
-<script type="text/javascript" src="{{ $script.Permalink }}" integrity="{{ $script.Data.Integrity }}"></script>
+<script src="{{ $script.Permalink }}" integrity="{{ $script.Data.Integrity }}"></script>
 </body>
 </html>

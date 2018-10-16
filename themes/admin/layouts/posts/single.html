@@ -1,25 +1,19 @@
 {{ define "header" }}
-  <input type="text" name="title" class="title" value="{{ .Title }}">
+  <h1 class="title"><span contenteditable="true">{{ .Title }}</span></h1>
   <div class="meta">
-    <input type="text" name="authors" class="authors" value="" list="people">
-    <datalist id="people">
-      <option value="Josef Kittler">
-      <option value="Paul@Koppen">
-      <option value="Zhenhua@Feng">
-    </datalist>
-    {{ if .Params.people }}
-    <span class="authors">{{ partial "taxonomy-links.html" (dict "Site" .Site "Params" .Params "taxonomy" "people") }}</span>
+    <span class="authors"><span contenteditable="true">{{ partial "taxonomy-links.html" (dict "Site" .Site "Params" .Params "taxonomy" "people") }}</span></span>
     <span class="divider">|</span>
-    {{ end }}
-    <time class="date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 Jan 2006"}}</time>
+    <time class="date" datetime="{{ .Date.Format "2006-01-02" }}"><span contenteditable="true">{{ .Date.Format "2 Jan 2006"}}</span></time>
   </div>
 {{ end }}
 
 
 {{ define "main"}}
-	<article class="{{ partial "content-class.html" . }} main">
+  <article class="{{ partial "content-class.html" . }} main">
     <section class="content">
-      {{ .Content }}
+      <div contenteditable="true">
+        {{ .Content }}
+      </div>
     </section>
 
     <section class="info">
@@ -84,5 +78,5 @@
       {{ end }}
       <div class="clear"></div>
     </nav>
-	</article>
+  </article>
 {{ end }}
