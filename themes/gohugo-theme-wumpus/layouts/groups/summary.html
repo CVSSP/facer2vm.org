@@ -1,13 +1,10 @@
-<article class="{{ partial "content-class.html" . }} summary">
-  <header>
-    <h2 class="title"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
-  </header>
-  {{ with .Description | default (.Summary | truncate 220) }}
-  <blockquote class="excerpt" cite=".RelPermalink">
-    <p>{{ . }}
-  </blockquote>
-  {{ end }}
-  <footer class="meta">
-    {{ partial "num-pages.html" .Pages }}
-  </footer>
-</article>
+        <article class="{{ partial "content-class.html" . }} summary">
+          <header>
+            <h2 class="headline"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+          </header>
+          {{- with .Description | default (.Summary | truncate 220) }}
+          <blockquote class="excerpt" cite="{{ $.RelPermalink }}">
+            <p>{{ . }}
+          </blockquote>
+          {{- end }}
+        </article>

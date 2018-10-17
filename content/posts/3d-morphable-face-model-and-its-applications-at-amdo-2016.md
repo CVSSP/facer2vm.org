@@ -19,7 +19,7 @@ Deformable Models 2016, held at Palma, Mallorca during 13-15 July 2016.
 The talk gave him an opportunity to present the EPSRC FACER2VM project in
 unconstrained face recognition to the conference audience.
 
-![3DMM and its applications](/images/3DMM-and-its-applications.png)
+![3DMM and its applications](/images/3DMM-and-its-applications.jpg)
 
 
 ### Presentation

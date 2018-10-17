@@ -13,7 +13,7 @@ summaryLength = 35
 
 [taxonomies]
   company = "companies"
-  people = "people"
+  person = "people"
   group = "groups"
   tag = "tags"
 

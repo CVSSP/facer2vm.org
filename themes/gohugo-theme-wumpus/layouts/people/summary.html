@@ -1,35 +1,44 @@
-<article class="{{ partial "content-class.html" . }} summary">
-  <figure class="avatar">
-    {{ with .Params.profile_image }}
-    {{ with ($.Resources.GetMatch .) }}
-    <img src="{{ .RelPermalink }}" alt="{{ $.Params.name }}">
-    {{ end }}{{ end }}
-  </figure>
-  <div class="bio">
-    <header>
-      <h2 class="name">
-        {{ if .Scratch.Get "people_show_link" }}
-        <a href="{{ .RelPermalink }}">{{ .Params.prefix }} {{ .Params.name }}</a>
-        {{ else }}{{ .Params.prefix }} {{ .Params.name }}{{ end }}
-      </h2>
-    </header>
-    {{ if .Scratch.Get "people_show_link" }}
-    <blockquote class="about" cite=".RelPermalink">
-      <p>{{ .Params.bio | safeHTML }}
-    </blockquote>
-    {{ else }}
-    <div class="about">
-      <p>{{ .Params.bio | safeHTML }}
-    </div>
-    {{ end }}
-    <footer class="meta">
-      {{ if and (.Scratch.Get "people_show_stats") (len .Pages) }}
-      <span class="stats"><i class="ic ic-pencil"></i> {{ partial "num-pages.html" .Pages }}</span>
-      {{ end }}
-      {{ with .Params.location }}<span class="location"><i class="ic ic-location"></i> {{ . }}</span>{{ end }}
-      {{ with .Params.website }}<span class="website"><i class="ic ic-link"></i> <a href="{{ . }}" rel="noopener external">{{ i18n "Website" }}</a></span>{{ end }}
-      {{ with .Params.twitter }}<span class="twitter"><i class="ic ic-twitter"></i> <a target="_blank" href="https://twitter.com/{{ . }}" rel="noopener external nofollow noreferrer" referrerpolicy="no-referrer">Twitter</a></span>{{ end }}
-      {{ with .Params.facebook }}<span class="facebook"><i class="ic ic-facebook"></i> <a target="_blank" href="https://facebook.com/{{ . }}" rel="noopener external nofollow noreferrer" referrerpolicy="no-referrer">Facebook</a></span>{{ end }}
-    </footer>
-  </div>
-</article>
+          <section class="{{ partial "content-class.html" . }} columns summary">
+            <figure class="profile-image">
+              {{- with .Params.profile_image }}
+                {{- with ($.Resources.GetMatch .) }}
+              <img src="{{ .RelPermalink }}" alt="{{ $.Params.name }}">
+                {{- end }}
+              {{- end }}
+            </figure>
+            <div class="rows bio">
+              <header>
+                <h2 class="name">
+                  {{- if .Scratch.Get "people_show_link" }}
+                  <a href="{{ .RelPermalink }}">{{ .Params.prefix }} {{ .Params.name }}</a>
+                  {{- else }}{{ .Params.prefix }} {{ .Params.name }}{{ end }}
+                </h2>
+              </header>
+              {{- if .Scratch.Get "people_show_link" }}
+              <blockquote class="about" cite="{{ .RelPermalink }}">
+                <p>{{ .Params.bio | safeHTML }}
+              </blockquote>
+              {{- else }}
+              <div class="about">
+                <p>{{ .Params.bio | safeHTML }}
+              </div>
+              {{- end }}
+              <footer class="meta">
+                {{- if and (.Scratch.Get "people_show_stats") (len .Pages) }}
+                <span class="stats"><i class="ic ic-pencil"></i> {{ partial "num-pages.html" .Pages }}</span>
+                {{- end }}
+                {{- with .Params.location }}
+                <span class="location"><i class="ic ic-location"></i> {{ . }}</span>
+                {{- end }}
+                {{- with .Params.website }}
+                <span class="website"><i class="ic ic-link"></i> <a href="{{ . }}" rel="noopener external">{{ i18n "Website" }}</a></span>
+                {{- end }}
+                {{- with .Params.twitter }}
+                <span class="twitter"><i class="ic ic-twitter"></i> <a target="_blank" href="https://twitter.com/{{ . }}" rel="noopener external nofollow noreferrer" referrerpolicy="no-referrer">Twitter</a></span>
+                {{- end }}
+                {{- with .Params.facebook }}
+                <span class="facebook"><i class="ic ic-facebook"></i> <a target="_blank" href="https://facebook.com/{{ . }}" rel="noopener external nofollow noreferrer" referrerpolicy="no-referrer">Facebook</a></span>
+                {{- end }}
+              </footer>
+            </div>
+          </section>

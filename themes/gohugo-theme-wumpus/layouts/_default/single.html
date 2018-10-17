@@ -1,19 +1,18 @@
 {{ define "header" }}
-  <h1 class="title">{{ .Title }}</h1>
-{{ end }}
+        <h1 class="headline">{{ .Title }}</h1>
+{{- end }}
 
 
 {{ define "main" }}
-	<article class="{{ partial "content-class.html" . }} main">
-    <section class="content">
-      {{ .Content }}
-    </section>
+        <div class="content">
+          {{ .Content }}
+        </div>
+        <div class="info columns">
+          <div class="tags">
+            {{- partial "taxonomy-links.html" (dict "Site" .Site "Params" .Params "taxonomy" "tags" "separator" " " "template" "button") -}}
+          </div>
+        </div>
+{{- end }}
 
-    <section class="info">
-      <aside class="tags">
-        {{- partial "taxonomy-links.html" (dict "Site" .Site "Params" .Params "taxonomy" "tags" "separator" " ") -}}
-      </aside>
-      <div class="clear"></div>
-    </section>
-	</article>
-{{ end }}
+
+{{ define "links" }}<!-- -->{{- end }}

@@ -1,27 +1,19 @@
 {{ define "header" }}
 {{- $pages := cond .IsHome (where .Pages "Type" "posts") .Pages }}
-    <h1 class="title">{{ .Title }}</h1>
-    <span class="description">{{ if .IsHome }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ else }}{{ partial "num-pages.html" $pages }}{{ end }}</span>
+        <h1 class="headline">{{ .Title }}</h1>
+        <span class="description">{{ if .IsHome }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ else }}{{ partial "num-pages.html" $pages }}{{ end }}</span>
 {{- end }}
 
 
-{{ define "main" }}
-  {{- with .Content }}
-      <article class="{{ partial "content-class.html" $ }} main">
-        <section class="content">{{ . }}</section>
-      </article>
-  {{- end }}
-
-  {{- if not .IsPage }}
-    {{- $pages := cond .IsHome (where .Pages "Type" "posts") .Pages }}
-    {{- $paginator := .Paginate $pages }}
-    {{- if $paginator.TotalNumberOfElements }}
-      {{- range $paginator.Pages }}
-        {{- .Scratch.Set "people_show_link" (cond .IsNode 1 0) }}
-        {{- .Scratch.Set "people_show_stats" (ne $.Kind "taxonomyTerm") }}
+{{ define "links" }}
+  {{- $pages := cond .IsHome (where .Pages "Type" "posts") .Pages }}
+  {{- $paginator := .Paginate $pages }}
+  {{- if $paginator.TotalNumberOfElements }}
+    {{- range $paginator.Pages }}
+      {{- .Scratch.Set "people_show_link" (cond .IsNode 1 0) }}
+      {{- .Scratch.Set "people_show_stats" (ne $.Kind "taxonomyTerm") }}
 {{ .Render "summary" }}
-      {{- end }}
-      {{- partial "pagination.html" $paginator }}
     {{- end }}
+    {{- partial "pagination.html" $paginator }}
   {{- end }}
 {{- end }}

@@ -1,5 +1,7 @@
 {{/*
-   * This renders a member's page.
+   * This renders a personal page for people with an `_index.md` to
+   * include references to blog posts on their profile page.
+   * For people pages with an `index.md` see single.html.
    *
    */}}
 
@@ -7,24 +9,27 @@
 
 
 {{ define "main" }}
-	<article class="{{ partial "content-class.html" . }} main">
-    <section class="header">
-      {{ .Scratch.Set "people_show_link" 0 }}
-      {{ .Scratch.Set "people_show_stats" 1 }}
-      {{ .Render "summary" }}
-    </section>
-    <section class="content">
-      {{ .Content }}
-    </section>
-  </article>
+        <div class="header">
+          {{- .Scratch.Set "people_show_link" 0 }}
+          {{- .Scratch.Set "people_show_stats" 1 }}
+{{ .Render "summary" }}
+        </div>
+        {{- with .Content }}
+        <div class="content">
+          {{ . }}
+        </div>
+        {{- end }}
+{{- end }}
 
-  {{ $paginator := .Paginate .Pages }}
-  {{ if $paginator.TotalNumberOfElements }}
-    {{ range $paginator.Pages }}
-      {{ .Scratch.Set "people_show_link" (cond .IsNode 1 0) }}
-      {{ .Scratch.Set "people_show_stats" (ne $.Kind "taxonomyTerm") }}
-      {{ .Render "summary" }}
-    {{ end }}
-    {{ partial "pagination.html" $paginator }}
-  {{ end }}
-{{ end }}
+
+{{ define "links" }}
+  {{- $paginator := .Paginate .Pages }}
+  {{- if $paginator.TotalNumberOfElements }}
+    {{- range $paginator.Pages }}
+      {{- .Scratch.Set "people_show_link" (cond .IsNode 1 0) }}
+      {{- .Scratch.Set "people_show_stats" (ne $.Kind "taxonomyTerm") }}
+{{ .Render "summary" }}
+    {{- end }}
+    {{- partial "pagination.html" $paginator }}
+  {{- end }}
+{{- end }}

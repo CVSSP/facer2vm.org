@@ -25,6 +25,9 @@ schema.org/
   <meta name="HandheldFriendly" content="True">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  {{- /*    Style sheets
+       * ===============
+       */}}
   {{- if $production }}
     {{- /* Combine all resources into one. */}}
     {{- $options := (dict "outputStyle" "compressed" "enableSourceMap" 0) }}
@@ -44,6 +47,13 @@ schema.org/
   <link rel="stylesheet" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}">
     {{- end }}
   {{- end }}
+
+  {{- /*    Site scripts
+       * ===============
+       */}}
+  {{- $wumpus := resources.Get "assets/js/wumpus.js" }}
+  {{- $script := slice $wumpus | resources.Concat "assets/js/script.js" | fingerprint }}
+  <script defer src="{{ $script.Permalink }}" integrity="{{ $script.Data.Integrity }}"></script>
 
   {{- with .Site.Params.favicon }}
   <link rel="shortcut icon" href="/{{ . }}" type="image/x-icon">
@@ -72,33 +82,48 @@ schema.org/
 </head>
 <body class="{{ partial "content-class.html" . }}{{ if $production }} production{{ else }} dev{{ end }}">
 
-<div id="wrapper">
+<div id="scroll">
+  <main>
+    <article class="rows">
 
-  {{- /*    Page header
-       * ==============
-       */}}
-  <header id="header" class="{{ partial "content-class.html" . }}"{{ with (cond .IsHome .Site.Params.feature_image .Params.feature_image) }} style="background-image: url('{{ . }}');"{{ end }}>
-    {{- /*
-         *    Header customisation
+      {{- /*    Page header
+           * ==============
+           */}}
+      <header id="header" class="main-column {{ partial "content-class.html" . }}"{{ with (cond .IsHome .Site.Params.feature_image .Params.feature_image) }} style="background-image: url('{{ . }}');"{{ end }}>
+        {{- /*
+             *    Header customisation
+             * =======================
+             */}}
+        {{- block "header" . }}
+        <h1 class="headline">{{ .Title }}</h1>
+        {{- end }}
+      </header>
+      <div id="squealer"></div>
+
+      {{- /*    Main content
+           * ===============
+           */}}
+      <div id="main" class="main-column {{ partial "content-class.html" . }}">
+        {{- block "main" . }}
+          {{- with .Content }}
+        <div class="content">
+          {{ . }}
+        </div>
+          {{- end }}
+        {{- end }}
+      </div>
+    </article>
+
+    {{- /*    Links to other pages
          * =======================
          */}}
-    {{- block "header" . }}
-      <h1 class="title">{{ .Title }}</h1>
-      <div class="description">{{ with (cond .IsHome .Site.Params.description .Description) }}{{ . }}{{ end }}</div>
-    {{- end }}
-  </header>
-
-  {{- /*  Main content
-       * ===============
-       */}}
-  <main id="main">
-    <div class="speed_up_rendering">
-      {{- block "main" . }}
-        {{- with .Content }}
-      <article class="{{ partial "content-class.html" $ }} main">
-        <section class="content">{{ . }}</section>
-      </article>
+    <div id="links" class="main-column {{ partial "content-class.html" . }}">
+      {{- block "links" . }}
+      <ul>
+        {{- range .Pages }}
+        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a>
         {{- end }}
+      </ul>
       {{- end }}
     </div>
   </main>
@@ -106,18 +131,15 @@ schema.org/
   {{- /*    Site footer
        * ==============
        */}}
-  <footer id="footer">
-    <div>{{/* Do not remove div. It controls .credits{border-top}. */}}
-      {{- block "footer" . }}
-      <div class="credits">
-        <p class="copyright"><a href="{{ .Site.BaseURL }}">{{ with .Site.Copyright }}{{ . }}{{ else }}&copy; {{ now.Format "2006" }} {{ .Site.Title }}{{ end }}</a>
-        <!--p class="theme">{{ i18n "Theme" }} <a href="//gitlab.com/wpk-/gohugo-theme-wumpus">Wumpus</a> {{ i18n "By" }} <a href="//paulkoppen.com/" rel="nofollow">Paul Koppen</a>-->
-        <p class="software">{{ i18n "PublishedWith"}} <a href="//gohugo.io/">Hugo</a>
-      </div>
-      {{- end }}
+  <footer id="footer" class="main-column">
+    {{- block "footer" . }}
+    <div class="credits">
+      <p class="copyright"><a href="{{ .Site.BaseURL }}">{{ with .Site.Copyright }}{{ . }}{{ else }}&copy; {{ now.Format "2006" }} {{ .Site.Title }}{{ end }}</a>
+      {{- /*<p class="theme">{{ i18n "Theme" }} <a href="//gitlab.com/wpk-/gohugo-theme-wumpus">Wumpus</a> {{ i18n "By" }} <a href="//paulkoppen.com/" rel="nofollow">Paul Koppen</a>*/}}
+      <p class="software">{{ i18n "PublishedWith"}} <a href="//gohugo.io/">Hugo</a>
     </div>
+    {{- end }}
   </footer>
-
   <label class="hidden-close" for="menu-switch"></label>
 </div>
 
@@ -129,12 +151,12 @@ schema.org/
   <a id="home-button" class="nav-button logo" href="{{ .Site.BaseURL }}"><img src="{{ . }}" alt="{{ i18n "Blog Logo" }}"></a>
   {{- else}}
     {{- if not .IsHome }}
-  <a id="home-button" class="nav-button button" href="{{ .Site.BaseURL }}"><i class="ic ic-arrow-left"></i> {{ i18n "Home" }}</a></span>
+  <a id="home-button" class="nav-button button" href="{{ .Site.BaseURL }}"><i class="ic ic-arrow-left"></i><span class="caption">{{ i18n "Home" }}</span></a>
     {{- end }}
   {{- end }}
 
   {{- if .Site.Menus.main }}
-  <label  id="menu-button" class="nav-button button" for="menu-switch"><i class="ic ic-menu"></i> {{ i18n "Menu" }}</label>
+  <label  id="menu-button" class="nav-button button" for="menu-switch"><i class="ic ic-menu"></i><span class="caption">{{ i18n "Menu" }}</span></label>
   {{- end }}
 </nav>
 
@@ -145,37 +167,27 @@ schema.org/
   <p class="nav-label">{{i18n "Menu"}}</p>
   <ul>
     {{- range .Site.Menus.main }}
-    <li class="nav-{{ replace (trim .URL "/") "/" "_" | urlize }}{{if or ($.Page.IsMenuCurrent "main" .) ($.Page.HasMenuCurrent "main" .) }} active{{end}}" role="presentation"><a href="{{ .URL }}">{{ .Pre }} <span>{{ .Name }}</span></a></li>
+    <li class="nav-{{ replace (trim .URL "/") "/" "_" | urlize }}{{if or ($.Page.IsMenuCurrent "main" .) ($.Page.HasMenuCurrent "main" .) }} active{{end}}" role="presentation"><a href="{{ .URL }}">{{ .Pre }}<span>{{ .Name }}</span></a>
     {{- end }}
     {{- with .Site.Param "twitter" }}
-    <li class="nav-twitter"><a href="//twitter.com/{{ . | urlize }}" title="{{ . }}"><i class="ic ic-twitter"></i> Twitter</a></li>
+    <li class="nav-twitter"><a href="//twitter.com/{{ . | urlize }}" title="{{ . }}"><i class="ic ic-twitter"></i>Twitter</a>
     {{- end }}
     {{- with .Site.Param "facebook" }}
-    <li class="nav-facebook"><a href="//facebook.com/{{ . | urlize }}" title="{{ . }}"><i class="ic ic-facebook"></i> Facebook</a></li>
+    <li class="nav-facebook"><a href="//facebook.com/{{ . | urlize }}" title="{{ . }}"><i class="ic ic-facebook"></i>Facebook</a>
     {{- end }}
     {{- with .Site.Param "instagram" }}
-    <li class="nav-instagram"><a href="//instagram.com/{{ . | urlize }}" title="{{ . }}"><i class="ic ic-instagram"></i> Instagram</a></li>
+    <li class="nav-instagram"><a href="//instagram.com/{{ . | urlize }}" title="{{ . }}"><i class="ic ic-instagram"></i>Instagram</a>
     {{- end }}
     {{- with .Site.Param "github" }}
-    <li class="nav-github"><a href="//github.com/{{ . | urlize }}" title="{{ . }}"><i class="ic ic-github"></i> Github</a></li>
+    <li class="nav-github"><a href="//github.com/{{ . | urlize }}" title="{{ . }}"><i class="ic ic-github"></i>Github</a>
     {{- end }}
     {{- with .Site.RSSLink }}
-    <li class="nav-rss"><a rel="alternate" type="application/rss+xml" href="{{ . }}"><i class="ic ic-rss"></i> {{ i18n "Subscribe" }}</a></li>
+    <li class="nav-rss"><a rel="alternate" type="application/rss+xml" href="{{ . }}"><i class="ic ic-rss"></i>{{ i18n "Subscribe" }}</a>
     {{- end }}
   </ul>
   <label for="menu-switch" class="close-button button">{{i18n "Close"}}</label>
   <input type="checkbox" id="menu-switch" value="open" tabindex="-1" role="switch" aria-checked="false">
 </nav>
 
-{{- /*    Site scripts
-     * ===============
-     */}}
-{{- $highlight := resources.Get "assets/js/libs/highlight.pack.js" }}
-{{- $fitvids := resources.Get "assets/js/libs/jquery.fitvids.js" }}
-{{- $history := resources.Get "assets/js/libs/jquery.history.js" }}
-{{- $jquery := resources.Get "assets/js/libs/jquery-1.11.3.min.js" }}
-{{- $wumpus := resources.Get "assets/js/wumpus.js" }}
-{{- $script := slice $jquery $highlight $fitvids $history $wumpus | resources.Concat "assets/js/script.js" | fingerprint }}
-<script src="{{ $script.Permalink }}" integrity="{{ $script.Data.Integrity }}"></script>
 </body>
 </html>
