@@ -1192,6 +1192,9 @@ body {
     #home-button {
         display: none;
     }
+    #menu-button {
+        background-color: $white;
+    }
 }
 
 @media only screen and (max-width: 640px) {
