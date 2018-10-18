@@ -377,12 +377,8 @@ body {
             height: 25rem;
         }
     }
-    &.people {
-        height: 8rem;
-        
-        &.has-cover {
-            height: 16rem;
-        }
+    &.people.has-cover {
+        height: 16rem;
     }
 }
 
@@ -863,7 +859,7 @@ body {
 #main.people {
     .summary {
         border: none;
-        margin-top: -4rem;
+        margin-top: -6rem;
         padding: 2em 0 3rem;
 
         .profile-image {
@@ -877,6 +873,8 @@ body {
     }
 
     &.has-cover .summary {
+        margin-top: -4rem;
+
         .profile-image {
             border: 0.125rem solid $white;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
