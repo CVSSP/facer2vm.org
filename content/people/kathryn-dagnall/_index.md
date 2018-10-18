@@ -9,6 +9,6 @@ location: London, UK
 date: 2016-01-01T09:00:00.000Z
 groups:
   - Steering Board
-weight: 3
+has_user_page: false
 ---
 

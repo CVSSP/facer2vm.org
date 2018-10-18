@@ -11,5 +11,5 @@ location: Newcastle, UK
 date: 2016-01-01T09:01:00.000Z
 groups:
   - Steering Board
-weight: 2
+has_user_page: false
 ---

@@ -10,5 +10,6 @@ location: Guildford, UK
 date: 2016-01-01T09:03:00.000Z
 groups:
   - Steering Board
+has_user_page: false
 weight: 1
 ---

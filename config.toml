@@ -12,7 +12,6 @@ summaryLength = 35
 #googleAnalytics = "UA-127414679-1"
 
 [taxonomies]
-  company = "companies"
   person = "people"
   group = "groups"
   tag = "tags"

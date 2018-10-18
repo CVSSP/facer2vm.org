@@ -7,9 +7,9 @@ feature_image: feature_image.jpg
 bio: >-
   Senior Lecturer, Department of Electrical and Electronic Engineering,
   <a href="//www.imperial.ac.uk/">Imperial College London</a>
-website: "//www.imperial.ac.uk/people/tk.kim/"
+website: //www.imperial.ac.uk/people/tk.kim/
 location: London, UK
-date: "2016-01-01T08:00:00.000Z"
+date: 2016-01-01T08:00:00.000Z
 groups:
   - Management Board
   - Researchers

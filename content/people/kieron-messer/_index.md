@@ -10,5 +10,5 @@ location: South Geelong, Australia
 date: 2016-01-01T09:00:00.000Z
 groups:
   - Steering Board
-weight: 9
+has_user_page: false
 ---
