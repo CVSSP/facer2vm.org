@@ -1,6 +1,6 @@
 ---
 title: 3D Morphable Face Model and its Applications
-feature_image: /images/Registration.jpg
+feature_image: feature_image.jpg
 description: >- 
   Tutorial at ICB 2016 about the 3D Morphable Face Model and its applications.
 date: 2016-06-13T09:00:00.000Z

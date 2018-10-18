@@ -1,6 +1,6 @@
 ---
 title: NHK filming at CVSSP
-feature_image: /images/nhk-filming-at-cvssp.jpg
+feature_image: feature_image.jpg
 featured: 1
 date: 2017-10-09T10:20:00.000Z
 people:

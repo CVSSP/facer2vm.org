@@ -1,6 +1,6 @@
 ---
 title: Extending NMF to 3D Registered Data
-feature_image: /images/extending-nmf-to-3d.jpg
+feature_image: feature_image.jpg
 description: >-
   Paper accepted for ICB 2016 on extending non-negative matrix factorisation to
   3D data.

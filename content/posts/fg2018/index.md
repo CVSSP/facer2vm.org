@@ -1,9 +1,7 @@
 ---
-title: "IEEE FG 2018 Workshop on Dense 3D Reconstruction of 2D Face Images in the Wild"
-slug: "fg2018"
-feature_image: ""
-date: "2017-10-12T15:14:20.000Z"
-layout: "page"
+title: IEEE FG 2018 Workshop on Dense 3D Reconstruction of 2D Face Images in the Wild
+date: 2017-10-12T15:14:20.000Z
+layout: page
 people:
   - Zhenhua Feng
 tags:

@@ -1,6 +1,6 @@
 ---
-title: "{{ .TranslationBaseName | humanize | title }}"
-feature_image: "{{ .Site.Params.feature_image }}"
+title: {{ replaceRE ".*?([^/\\\\]+).$" "$1" .Dir | humanize | title }}
+feature_image: feature_image.jpg
 description: ""
 date: {{ .Date }}
 tags:
