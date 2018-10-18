@@ -475,6 +475,13 @@ body {
     }
 }
 
+#squealer {
+    // Tells mum (the nav buttons) when #header leaves the house (viewport).
+    // More robust than monitoring #header directly.
+    position: relative;
+    top: -2rem;
+}
+
 /* Menu
    -------------------------------------------------------------------------- */
 
@@ -919,13 +926,6 @@ body {
 
 #links.tags {
     flex-flow: row wrap;
-    margin: auto;
-    padding: 0 calc(50% - 16rem); // <- Preferred to keep parallax effect working.
-    //width: 36rem;               // <- Doesn't maintain full-width white bg.
-
-   .pagination {
-        margin-top: 3rem;
-    }
 }
 
 /* Post Comments
@@ -1180,24 +1180,17 @@ body {
 
 }
 
-/* The squealer (tells on Header.)
-   -------------------------------------------------------------------------- */
-
-#squealer {
-    position: relative;
-    top: -2rem;
-}
-
 /* ==========================================================================
    Screen size adjustments
    ========================================================================== */
 
-@media only screen and (max-width: 960px) {
-    .blog-logo,
-    .button.nav {
-        // position: absolute;
-        // Chrome bug won't let us put position fixed inside #scroll, so we
-        // keep them out. But it means we cannot scroll the nav buttons.
+@media only screen and (max-width: 875px) {
+    // Chrome bug won't let us put position fixed inside #scroll, so we
+    // keep them out. But it means we cannot scroll the nav buttons.
+    // Solution for now is to hide the home button on smaller screens and
+    // accept the menu button overlaying content.
+    #home-button {
+        display: none;
     }
 }
 
