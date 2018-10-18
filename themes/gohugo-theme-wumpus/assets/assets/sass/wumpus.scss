@@ -464,17 +464,6 @@ body {
     margin-right: 1.5rem !important;
 }
 
-.cover-active .nav-button { // (while the header is in view)
-    color: $white;
-    border-color: rgba(255, 255, 255, 0.5);
-
-    &:hover,
-    &:focus {
-        color: $white;
-        border-color: $white;
-    }
-}
-
 #squealer {
     // Tells mum (the nav buttons) when #header leaves the house (viewport).
     // More robust than monitoring #header directly.
@@ -1194,6 +1183,18 @@ body {
     }
     #menu-button {
         background-color: $white;
+    }
+}
+@media only screen and (min-width: 876px) {
+    .cover-active .nav-button { // (while the header is in view)
+        color: $white;
+        border-color: rgba(255, 255, 255, 0.5);
+
+        &:hover,
+        &:focus {
+            color: $white;
+            border-color: $white;
+        }
     }
 }
 
