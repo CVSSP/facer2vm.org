@@ -22,6 +22,8 @@ summaryLength = 35
   description = "Face Matching for Automatic Identity Retrieval, Recognition, Verification and Management"
   #favicon = "this.png"
   feature_image = "/images/masthead-dark.jpg"
+  # The twitter param is optional, for use in the 404.html to contact you :)
+  twitter = "@Paul_Koppen"
 
 
 [languages]
