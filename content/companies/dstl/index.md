@@ -8,4 +8,5 @@ facebook: dstlmod
 twitter: "@dstlmod"
 groups:
   - User Group
+has_page: false
 ---

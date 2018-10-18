@@ -7,4 +7,5 @@ location: London, UK
 twitter: "@UniofHerts"
 groups:
   - User Group
+has_page: false
 ---

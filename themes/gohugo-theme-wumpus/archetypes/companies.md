@@ -8,4 +8,5 @@ facebook: ""
 twitter: ""
 groups:
   - User Group
+has_page: false
 ---

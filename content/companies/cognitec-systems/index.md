@@ -7,4 +7,5 @@ location: Dresden, Germany
 twitter: "@cognitec"
 groups:
   - User Group
+has_page: false
 ---

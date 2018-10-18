@@ -8,4 +8,5 @@ facebook: IBMUKI
 twitter: "@IBM_UK_news"
 groups:
   - User Group
+has_page: false
 ---

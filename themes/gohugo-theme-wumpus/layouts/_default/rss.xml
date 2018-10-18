@@ -12,7 +12,7 @@
     {{ with .OutputFormats.Get "RSS" }}
         {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
     {{ end }}
-    {{ range cond .IsHome (where .Pages "Type" "posts") .Pages }}
+    {{ range where (cond .IsHome (where .Pages "Type" "posts") .Pages) "Params.has_page" "!=" 0 }}
     <item>
       <title>{{ with .Title }}{{ . }}{{ else }}{{ with .Params.prefix }}{{ . }} {{ end }}{{ with .Params.name }}{{ . }}{{ end }}{{ end }}</title>
       <link>{{ .Permalink }}</link>

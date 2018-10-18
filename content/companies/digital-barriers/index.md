@@ -8,4 +8,5 @@ facebook: digitalbarriers
 twitter: "@DigitalBarriers"
 groups:
   - User Group
+has_page: false
 ---

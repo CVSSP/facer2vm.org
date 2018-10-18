@@ -9,5 +9,5 @@ location: Swindon, UK
 date: 2017-10-01T13:15:00.000Z
 groups:
   - Steering Board
-has_user_page: false
+has_page: false
 ---

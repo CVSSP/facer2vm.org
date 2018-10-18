@@ -11,5 +11,5 @@ location: Michigan, USA
 date: 2016-01-01T09:01:00.000Z
 groups:
   - Steering Board
-has_user_page: false
+has_page: false
 ---

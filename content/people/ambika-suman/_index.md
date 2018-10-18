@@ -9,5 +9,5 @@ location: London, UK
 date: 2018-03-01T14:20:00.000Z
 groups:
   - Steering Board
-has_user_page: false
+has_page: false
 ---

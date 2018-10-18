@@ -8,4 +8,5 @@ facebook: metpoliceuk
 twitter: "@metpoliceuk"
 groups:
   - User Group
+has_page: false
 ---

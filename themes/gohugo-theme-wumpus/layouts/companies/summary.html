@@ -8,12 +8,22 @@
           </figure>
           <div class="rows bio">
             <header>
-              <h2 class="headline">{{ .Title }}</h2>
+              <h2 class="headline">{{ .Title }}
+                {{- if .Scratch.Get "show_link" }}
+                <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                {{- else }}{{ .Title }}{{ end }}
+              </h2>
             </header>
             {{- with .Description | default (.Summary | truncate 220) }}
-            <blockquote class="excerpt" cite=".RelPermalink">
+              {{- if $.Scratch.Get "show_link" }}
+            <blockquote class="excerpt" cite="{{ .RelPermalink }}">
               <p>{{ . }}
             </blockquote>
+              {{- else }}
+            <div class="excerpt">
+              <p>{{ . }}
+            </div>
+              {{- end }}
             {{- end }}
             <footer class="meta">
               {{- with .Params.location }}<span class="location"><i class="ic ic-location"></i> {{ . }}</span>{{ end }}

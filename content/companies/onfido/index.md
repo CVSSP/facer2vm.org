@@ -8,4 +8,5 @@ facebook: Onfido
 twitter: "@Onfido"
 groups:
   - User Group
+has_page: false
 ---
