@@ -3,13 +3,13 @@ name: Paul Koppen
 prefix: Dr
 email: p.koppen@surrey.ac.uk
 profile_image: profile_image.png
-feature_image: feature_image.jpg
-bio: Project Manager FACER2VM. Research Fellow, Centre for Vision, Speech and
+bio: >-
+  Project Manager FACER2VM. Research Fellow, Centre for Vision, Speech and
   Signal Processing (CVSSP), <a href="//www.surrey.ac.uk/">University of
   Surrey</a>
-website: "//paulkoppen.com/"
+website: //paulkoppen.com/
 location: Guildford, UK
-date: "2017-10-10T22:13:47.000Z"
+date: 2017-10-10T22:13:47.000Z
 groups:
   - Management Board
   - Researchers

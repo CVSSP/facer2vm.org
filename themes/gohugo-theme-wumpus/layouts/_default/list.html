@@ -3,7 +3,7 @@
 {{- $paginator := .Paginate $pages }}
   <main itemscope itemtype="http://schema.org/CollectionPage">
     <article class="rows">
-      <header id="header" class="main-column {{ partial "content-class.html" . }}"{{ with .Params.feature_image }} style="background-image: url('{{ . }}');"{{ end }}>
+      <header id="header" class="main-column {{ partial "content-class.html" . }}"{{ with (cond .IsHome .Site.Params.feature_image .Params.feature_image) }} style="background-image: url('{{ . }}');"{{ end }}>
         {{- with .Params.feature_image }}
         <meta itemprop="image primaryImageOfPage" content="{{ . }}">
         {{- end }}
