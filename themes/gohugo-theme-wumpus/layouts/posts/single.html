@@ -34,13 +34,13 @@
             {{- partial "taxonomy-links.html" (dict "Site" .Site "Params" .Params "taxonomy" "tags" "separator" " " "template" "button") -}}
           </div>
           <aside class="social" itemprop="potentialAction" itemscope itemtype="http://schema.org/CommunicateAction">
-            <a class="twitter" href="https://twitter.com/share?text={{ .Title }}&url={{ .Permalink }}" target="_blank" rel="noopener external nofollow noreferrer" referrerpolicy="no-referrer" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;" itemprop="target">
+            <a class="twitter" href="https://twitter.com/share?text={{ .Title }}&url={{ .Permalink }}" target="_blank" rel="noopener external nofollow noreferrer" referrerpolicy="no-referrer" itemprop="target">
               <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
             </a>
-            <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink }}" target="_blank" rel="noopener external nofollow noreferrer" referrerpolicy="no-referrer" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;" itemprop="target">
+            <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink }}" target="_blank" rel="noopener external nofollow noreferrer" referrerpolicy="no-referrer" itemprop="target">
               <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
             </a>
-            <a class="googleplus" href="https://plus.google.com/share?url={{ .Permalink }}" target="_blank" rel="noopener external nofollow noreferrer" referrerpolicy="no-referrer" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;" itemprop="target">
+            <a class="googleplus" href="https://plus.google.com/share?url={{ .Permalink }}" target="_blank" rel="noopener external nofollow noreferrer" referrerpolicy="no-referrer" oitemprop="target">
               <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
             </a>
           </aside>
