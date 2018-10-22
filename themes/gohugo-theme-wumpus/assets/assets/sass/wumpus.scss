@@ -55,43 +55,49 @@ p {
     margin: 2rem 0;
 }
 
-ul, ol {
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.content ul, ol {
     margin: 0 0 2rem;
     padding-left: 2rem;
 }
 
-ul {
-    list-style: none;
-}
-li {
+.content li {
     position: relative;
 }
-ul > li:before,
-ol > li:before {
-    position: absolute;
-    width: 1.5rem;
-    margin-left: -2rem;
+.content ul > li:before,
+.content ol > li:before {
+    color: $black;
     font-family: 'Fira Sans', sans-serif;
     font-size: 1rem;
     font-weight: 500;
     line-height: 1.5rem;
+    margin-left: -2rem;
+    position: absolute;
     text-align: right;
-    color: $black;
+    width: 1.5rem;
 }
-ul > li:before {
+.content ul > li:before {
     margin-top: 0.25rem;
     content: '*';
 }
-ol {
+.content ol {
     list-style-type: none;
     counter-reset: item;
 }
-ol > li:before {
+.content ol > li:before {
     content: counter(item) ". " !important;
     counter-increment: item;
 }
 
-ol ol, ul ul, ul ol, ol ul {
+.content ol ol,
+.content ul ul,
+.content ul ol,
+.content ol ul {
     padding-left: 30px;
     margin: 15px 0;
 }
@@ -664,17 +670,24 @@ body {
     .bio {
         flex: 1 1;
         font-size: 0.75rem;
+    }
 
-        i {
-            color: inherit;
-        }
-
-        span {
-            display: inline-block;
-            font-size: 0.6rem;
-            margin-right: 0.75rem;
-            margin-top: 0.45rem;
-        }
+    .meta ul {
+        display: block;
+        margin: 0;
+        padding: 0;
+    }
+    .meta li {
+        display: inline-block;
+        font-size: 0.6rem;
+        margin-right: 0.75rem;
+        margin-top: 0.45rem;
+    }
+    .meta li:before {
+        color: inherit;
+        font-size: inherit;
+        margin-top: 0;
+        position: relative;
     }
 
     .headline {
@@ -694,7 +707,7 @@ body {
     }
 
     .about,     // people
-    .excerpt {  // page
+    .excerpt {  // posts, companies
         background: unset;
         border: unset;
         color: inherit;
@@ -773,6 +786,7 @@ body {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
+    list-style: none;
     position: relative;
 
     .headline {
@@ -822,6 +836,7 @@ body {
         left: -3.5rem;
     }
 }
+
 .posts .next {
     flex: 1 1 50%;
     position: relative;
@@ -857,23 +872,28 @@ body {
    -------------------------------------------------------------------------- */
 
 #main.people {
-    .summary {
-        border: none;
+    .header {
         margin-top: -6rem;
-        padding: 2em 0 3rem;
-
-        .profile-image {
-            margin-top: -0.5rem;
-        }
-
-        .name {
-            font-size: 1.5rem;
-            padding: 0 0 0.5rem;
-        }
     }
 
-    &.has-cover .summary {
-        margin-top: -4rem;
+    .summary {
+        border: none;
+        padding: 2em 0 3rem;
+    }
+
+    .profile-image {
+        margin-top: -0.5rem;
+    }
+
+    .name {
+        font-size: 1.5rem;
+        padding: 0 0 0.5rem;
+    }
+
+    &.has-cover {
+        .header {
+            margin-top: -4rem;
+        }
 
         .profile-image {
             border: 0.125rem solid $white;
@@ -889,9 +909,9 @@ body {
     }
 }
 
+// As an author on a blog post, or in the header on the profile page.
+// Basically, when not in a list of links.
 #main .people.summary {
-    // As an author on a blog post, or in the header on the profile page.
-    // Basically, when not in a list of links.
     padding-bottom: 2rem;
     padding-top: 2rem;
 }
@@ -912,7 +932,16 @@ body {
    -------------------------------------------------------------------------- */
 
 #links.tags {
-    flex-flow: row wrap;
+    .list {
+        display: block;
+    }
+    .list li {
+        display: inline-block;
+    }
+
+    .pagination {
+        margin-top: 3rem;
+    }
 }
 
 /* Post Comments

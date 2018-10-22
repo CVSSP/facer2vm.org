@@ -1,20 +1,48 @@
 {{- $production := not .Site.IsServer -}}
 <!DOCTYPE html>
-<html lang="{{ $.Site.LanguageCode | default "en" }}" itemscope itemtype="https://schema.org/{{ .Param "itemtype" | default "BlogPosting" }}">
+<html lang="{{ $.Site.LanguageCode | default "en" }}" itemscope itemtype="https://schema.org/WebSite">
 {{- /*
 schema.org/
-    PublicationEvent
+    WebPage
+    CollectionPage
+
     Organization
     Person
-    SoftwareApplication
-    Article
-    ScholarlyArticle
-    NewsArticle
+
     BlogPosting
+
+    Event
+      tag = Events
+      tag = Outreach
+    NewsArticle
+      tag = In the News
+    ScholarlyArticle
+      tag = Invited Talks
+      tag = Publications
+    SoftwareApplication
+      tag = Software
+
     WebPage
+
+
+    ItemList
+    Enumeration
+    BreadcrumbList
+
+
+                            Article
+Thing         Event         BlogPosting       SoftwareApplication
+                            ScholarlyArticle
+                            Newsarticle
+-----------   -----------   ---------------   ---------------
+name          name          headline          headline
+description   description   description       description
+                            articleBody
+
+
 */}}
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
   <title>{{ block "title" . }}{{ .Site.Title }}{{ with .Params.Title }} | {{ . }}{{ end }}{{ end }}</title>
@@ -68,7 +96,6 @@ schema.org/
   {{- /* NOTE: These Hugo Internal Templates can be found starting at https://github.com/spf13/hugo/blob/master/tpl/tplimpl/template_embedded.go#L158 */}}
   {{- template "_internal/opengraph.html" . -}}
   {{- template "_internal/google_news.html" . -}}
-  {{- template "_internal/schema.html" . -}}
   {{- template "_internal/twitter_cards.html" . -}}
 
   <meta name="referrer" content="no-referrer-when-downgrade">
@@ -83,50 +110,49 @@ schema.org/
 <body class="{{ partial "content-class.html" . }}{{ if $production }} production{{ else }} dev{{ end }}">
 
 <div id="scroll">
-  <main>
-    <article class="rows">
 
-      {{- /*    Page header
-           * ==============
-           */}}
-      <header id="header" class="main-column {{ partial "content-class.html" . }}"{{ with (cond .IsHome .Site.Params.feature_image .Params.feature_image) }} style="background-image: url('{{ . }}');"{{ end }}>
-        {{- /*
-             *    Header customisation
-             * =======================
-             */}}
-        {{- block "header" . }}
-        <h1 class="headline">{{ .Title }}</h1>
-        {{- end }}
+  {{- /*   Page main content
+       * ===================
+       *
+       */}}
+  {{- block "main" . }}
+  <main itemscope itemtype="http://schema.org/BlogPosting">
+    <article>
+      <header id="header">
+        <h1 itemprop="name headline">title</h1>
+        ...
       </header>
-      <div id="squealer"></div>
 
-      {{- /*    Main content
-           * ===============
-           */}}
-      <div id="main" class="main-column {{ partial "content-class.html" . }}">
-        {{- block "main" . }}
-          {{- with .Content }}
-        <div class="content">
-          {{ . }}
+      <div id="main">
+        <div class="content" itemprop="articleBody"><!-- or "description" for non-articles -->
+          {{ .Content }}
         </div>
-          {{- end }}
-        {{- end }}
+
+        ... optional:
+        <div class="info">
+          ...
+        </div>
+
+        ... optional:
+        <footer class="multiple-authors">
+          ...
+        </footer>
+        ... or:
+        <section class="people">
+          ...
+        </section>
+
+        ... optional:
+        <section class="comments">
+          ... (disqus)
+        </section>
       </div>
     </article>
-
-    {{- /*    Links to other pages
-         * =======================
-         */}}
-    <div id="links" class="main-column {{ partial "content-class.html" . }}">
-      {{- block "links" . }}
-      <ul>
-        {{- range .Pages }}
-        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a>
-        {{- end }}
-      </ul>
-      {{- end }}
-    </div>
+    <ul id="links">
+      ...
+    </ul>
   </main>
+  {{- end }}
 
   {{- /*    Site footer
        * ==============

@@ -1,10 +1,15 @@
-{{ define "header" }}
-        <h1 class="headline">404</h1>
-        <span class="description">File not found</span>
-{{- end }}
-
-
 {{ define "main" }}
+  <main itemscope itemtype="http://schema.org/WebPage">
+    <article class="rows">
+      <header id="header" class="main-column {{ partial "content-class.html" . }}"{{ with .Params.feature_image }} style="background-image: url('{{ . }}');"{{ end }}>
+        {{- with .Params.feature_image }}
+        <meta itemprop="image primaryImageOfPage" content="{{ . }}">
+        {{- end }}
+        <h1 class="headline" itemprop="name headline">404</h1>
+        <span class="description" itemprop="description">File not found</span>
+      </header>
+      <div id="squealer"></div>
+      <div id="main" class="main-column {{ partial "content-class.html" . }}">
         <div class="content">
           <p>We couldn't find that page.
           <p>It either <strong>has gone</strong> or it <em>never existed</em>,
@@ -30,7 +35,7 @@
             </a>
           </aside>
         </div>
+      </div>
+    </article>
+  </main>
 {{- end }}
-
-
-{{ define "links" }}<!-- -->{{- end }}

@@ -1,18 +1,20 @@
-{{ define "header" }}
-        <h1 class="headline">{{ .Title }}</h1>
-{{- end }}
-
-
 {{ define "main" }}
-        <div class="content">
-          {{ .Content }}
+  <main itemscope itemtype="http://schema.org/WebPage">
+    <article class="rows">
+      <header id="header" class="main-column {{ partial "content-class.html" . }}"{{ with .Params.feature_image }} style="background-image: url('{{ . }}');"{{ end }}>
+        {{- with .Params.feature_image }}
+        <meta itemprop="image primaryImageOfPage" content="{{ . }}">
+        {{- end }}
+        <h1 class="headline" itemprop="name headline">{{ .Title }}</h1>
+      </header>
+      <div id="squealer"></div>
+      <div id="main" class="main-column {{ partial "content-class.html" . }}">
+        {{- with .Content }}
+        <div class="content" itemprop="text">
+          {{ . }}
         </div>
-        <div class="info columns">
-          <div class="tags">
-            {{- partial "taxonomy-links.html" (dict "Site" .Site "Params" .Params "taxonomy" "tags" "separator" " " "template" "button") -}}
-          </div>
-        </div>
+        {{- end }}
+      </div>
+    </article>
+  </main>
 {{- end }}
-
-
-{{ define "links" }}<!-- -->{{- end }}

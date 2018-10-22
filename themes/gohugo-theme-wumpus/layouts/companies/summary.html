@@ -1,35 +1,46 @@
-        <article class="{{ partial "content-class.html" . }} columns summary">
-          <figure class="profile-image">
-            {{- with .Params.profile_image -}}
-              {{- with ($.Resources.GetMatch .) -}}
-            <img src="{{ .RelPermalink }}" alt="{{ $.Title }}">
+{{- $show_link := .Scratch.Get "show_link" | default 1 -}}
+          <article class="{{ partial "content-class.html" . }} columns summary" itemprop="{{ .Scratch.Get "itemprop" | default "item" }}" itemscope itemtype="http://schema.org/Organization">
+            <figure class="profile-image">
+              {{- with .Params.profile_image -}}
+                {{- with ($.Resources.GetMatch .) -}}
+              <img src="{{ .RelPermalink }}" alt="{{ $.Title }}" itemprop="logo">
+                {{- end -}}
               {{- end -}}
-            {{- end -}}
-          </figure>
-          <div class="rows bio">
-            <header>
-              <h2 class="headline">{{ .Title }}
-                {{- if .Scratch.Get "show_link" }}
-                <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-                {{- else }}{{ .Title }}{{ end }}
-              </h2>
-            </header>
-            {{- with .Description | default (.Summary | truncate 220) }}
-              {{- if $.Scratch.Get "show_link" }}
-            <blockquote class="excerpt" cite="{{ .RelPermalink }}">
-              <p>{{ . }}
-            </blockquote>
-              {{- else }}
-            <div class="excerpt">
-              <p>{{ . }}
-            </div>
+            </figure>
+            <div class="rows bio">
+              <header>
+                <h2 class="headline" itemprop="name">
+                  {{- if $show_link }}
+                  <a href="{{ .RelPermalink }}" itemprop="url">{{ .Title }}</a>
+                  {{- else }}{{ .Title }}{{ end }}
+                </h2>
+              </header>
+              {{- with .Description | default (.Summary | truncate 220) }}
+                {{- if $show_link }}
+              <blockquote class="excerpt" cite="{{ .RelPermalink }}" itemprop="description">
+                <p>{{ . }}
+              </blockquote>
+                {{- else }}
+              <div class="excerpt" itemprop="description">
+                <p>{{ . }}
+              </div>
+                {{- end }}
               {{- end }}
-            {{- end }}
-            <footer class="meta">
-              {{- with .Params.location }}<span class="location"><i class="ic ic-location"></i> {{ . }}</span>{{ end }}
-              {{- with .Params.website }}<span class="website"><i class="ic ic-link"></i> <a href="{{ . }}" rel="noopener external">{{ i18n "Website" }}</a></span>{{ end }}
-              {{- with .Params.twitter }}<span class="twitter"><i class="ic ic-twitter"></i> <a target="_blank" href="https://twitter.com/{{ . }}" rel="noopener external nofollow noreferrer" referrerpolicy="no-referrer">Twitter</a></span>{{ end }}
-              {{- with .Params.facebook }}<span class="facebook"><i class="ic ic-facebook"></i> <a target="_blank" href="https://facebook.com/{{ . }}" rel="noopener external nofollow noreferrer" referrerpolicy="no-referrer">Facebook</a></span>{{ end }}
-            </footer>
-          </div>
-        </article>
+              <footer class="meta">
+                <ul>
+                  {{- with .Params.location }}
+                  <li class="location ic ic-location" itemprop="address">{{ . }}
+                  {{- end }}
+                  {{- with .Params.website }}
+                  <li class="website ic ic-link"><a href="{{ . }}" rel="noopener external" itemprop="sameAs">{{ i18n "Website" }}</a>
+                  {{- end }}
+                  {{- with .Params.twitter }}
+                  <li class="twitter ic ic-twitter"><a target="_blank" href="https://twitter.com/{{ . }}" rel="noopener external nofollow noreferrer" referrerpolicy="no-referrer" itemprop="sameAs">Twitter</a>
+                  {{- end }}
+                  {{- with .Params.facebook }}
+                  <li class="facebook ic ic-facebook"><a target="_blank" href="https://facebook.com/{{ . }}" rel="noopener external nofollow noreferrer" referrerpolicy="no-referrer" itemprop="sameAs">Facebook</a>
+                  {{- end }}
+                </ul>
+              </footer>
+            </div>
+          </article>

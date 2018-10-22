@@ -1,10 +1,16 @@
-        <article class="{{ partial "content-class.html" . }} summary">
-          <header>
-            <h2 class="headline"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
-          </header>
-          {{- with .Description | default (.Summary | truncate 220) }}
-          <blockquote class="excerpt" cite="{{ $.RelPermalink }}">
-            <p>{{ . }}
-          </blockquote>
-          {{- end }}
-        </article>
+{{- $show_link := .Scratch.Get "show_link" | default 1 -}}
+          <article class="{{ partial "content-class.html" . }} summary" itemprop="{{ .Scratch.Get "itemprop" | default "item" }}" itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop="parentOrganization" content="{{ .Site.Title }}">
+            <header>
+              <h2 class="headline" itemprop="name">
+                {{- if $show_link }}
+                <a href="{{ .RelPermalink }}" itemprop="url">{{ .Title }}</a>
+                {{- else }}{{ .Title }}{{ end }}
+              </h2>
+            </header>
+            {{- with .Description | default (.Summary | truncate 220) }}
+            <blockquote class="excerpt" cite="{{ $.RelPermalink }}" itemprop="description">
+              <p>{{ . }}
+            </blockquote>
+            {{- end }}
+          </article>
