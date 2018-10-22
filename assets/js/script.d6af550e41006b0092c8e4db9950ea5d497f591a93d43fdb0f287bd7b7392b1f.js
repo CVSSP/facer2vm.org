@@ -46,4 +46,37 @@
 
     buildMenu()
 
+	/* ======================================================================
+	   Social sharing buttons.
+	   ====================================================================== */
+
+    function buildShareButtons() {
+        var opts = {
+            '.twitter': ['twitter-share', 'width=550,height=235'],
+            '.facebook': ['facebook-share','width=580,height=296'],
+            '.googleplus': ['google-plus-share', 'width=490,height=530'],
+        }
+        var button
+        var parent_node = document.querySelector('.social')
+
+        if (parent_node) {
+            for (var query in opts) {
+                button = parent_node.querySelector(query)
+                if (button) {
+                    addListener(button, opts[query][0], opts[query][1])
+                }
+            }
+        }
+
+        function addListener(elm, window_name, window_features) {
+            elm.addEventListener('click', function(evt) {
+                var win = window.open('', window_name, window_features)
+                win.opener = null
+                win.location.replace(elm.href)
+                evt.returnValue = false
+            })
+        }
+    }
+
+    buildShareButtons()
 })();
