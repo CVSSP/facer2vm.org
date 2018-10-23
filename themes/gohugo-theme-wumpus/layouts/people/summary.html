@@ -33,7 +33,7 @@
                   <li class="stats ic ic-pencil">{{ partial "num-pages.html" .Pages }}
                   {{- end }}
                   {{- with .Params.location }}
-                  <li class="location ic ic-location" itemprop="workLocation">{{ . }}
+                  <li class="location ic ic-location" itemprop="workLocation" itemscope itemtype="http://schema.org/Place"><span itemprop="address">{{ . }}</span>
                   {{- end }}
                   {{- with .Params.website }}
                   <li class="website ic ic-link"><a href="{{ . }}" rel="noopener external" itemprop="{{ cond $show_link "sameAs" "url" }}">{{ i18n "Website" }}</a>

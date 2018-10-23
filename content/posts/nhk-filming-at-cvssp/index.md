@@ -10,6 +10,8 @@ people:
   - Muhammad Rana
 tags:
   - Outreach
+meta:
+  location: CVSSP, University of Surrey, UK
 ---
 
 During the weekend, the Japanese TV Broadcaster NHK came to film an experiment
