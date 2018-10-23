@@ -27,8 +27,10 @@
   <main itemscope itemtype="{{ $itemtype }}">
     <article class="rows">
       <header id="header" class="main-column {{ partial "content-class.html" . }}"{{ with .Params.feature_image }} style="background-image: url('{{ . }}');"{{ end }}>
-        {{- with .Resources.GetMatch .Params.feature_image }}
+        {{- with .Params.feature_image }}
+          {{- with $.Resources.GetMatch . }}
         <meta itemprop="image" content="{{ .RelPermalink }}">
+          {{- end }}
         {{- end }}
         <h1 class="headline" itemprop="name{{ if not $is_event }} headline{{ end }}">{{ .Title }}</h1>
         <div class="meta">
