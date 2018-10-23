@@ -7,4 +7,6 @@ tags:
   - Events
 people:
   - 
+meta:
+  location: CVSSP, University of Surrey, UK
 ---

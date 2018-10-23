@@ -8,6 +8,10 @@ people:
   - Zhenhua Feng
 tags:
   - Events
+meta:
+  location: Manchester Metropolitan University Business School - All Saints Campus Oxford Road, Manchester, M156BH
+  startDate: 2016-06-23T08:30:00.000Z
+  endDate: 2016-06-23T17:00:00.000Z
 ---
 
 The event will cover new and emerging techniques in the area of face research

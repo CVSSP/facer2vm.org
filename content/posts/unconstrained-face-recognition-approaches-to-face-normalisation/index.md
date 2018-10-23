@@ -15,6 +15,10 @@ people:
   - Stefanos Zafeiriou
 tags:
   - Events
+meta:
+  location: 35 BA 00, CVSSP, University of Surrey, UK
+  startDate: 2016-09-15T10:00:00.000Z
+  endDate: 2016-09-16T17:30:00.000Z
 ---
 
 This two-day brainstorming workshop explores the various approaches to

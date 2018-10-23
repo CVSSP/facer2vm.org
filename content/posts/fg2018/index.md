@@ -6,6 +6,11 @@ people:
   - Zhenhua Feng
 tags:
   - Events
+meta:
+  startDate: 2017-12-01
+  endDate: 2018-05-19
+  location: Xian, China
+  superEvent: //fg2018.cse.sc.edu/
 ---
 
 <div class="kg-card-markdown"><h3 id="news">News</h3>
