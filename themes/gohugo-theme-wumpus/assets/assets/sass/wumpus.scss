@@ -784,7 +784,7 @@ body {
     border-top: 1px solid $gray-90;
     color: $blue-15;
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
     justify-content: space-between;
     list-style: none;
     position: relative;
@@ -1241,6 +1241,9 @@ body {
     }
     .content img {
         width: 100%;
+    }
+    .posts .nav {
+        flex-flow: row wrap;
     }
     .posts .previous {
         border-bottom-color: $gray-90;

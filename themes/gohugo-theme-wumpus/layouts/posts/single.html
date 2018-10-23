@@ -1,4 +1,8 @@
 {{ define "main" }}
+{{- /*
+     * Item Type (schema.org)
+     * ======================
+     */ -}}
 {{- $itemtype := "http://schema.org/BlogPosting" }}
 {{- with index .Params.tags 0 }}
   {{- with . | urlize | printf "/tags/%s" | $.Site.GetPage }}
@@ -9,6 +13,17 @@
 {{- end }}
 {{- $is_event := eq "http://schema.org/Event" $itemtype }}
 {{- $is_article := in (slice "http://schema.org/BlogPosting" "http://schema.org/Article" "http://schema.org/ScholarlyArticle" "http://schema.org/NewsArticle") $itemtype }}
+{{- /*
+     * Page Ordering
+     * =============
+     */ -}}
+{{- $total := len .CurrentSection.Pages }}
+{{- $position := 0 }}
+{{- range $index, $page := .CurrentSection.Pages }}
+  {{- if eq $page $ }}
+    {{- $position = $index }}
+  {{- end }}
+{{- end }}
   <main itemscope itemtype="{{ $itemtype }}">
     <article class="rows">
       <header id="header" class="main-column {{ partial "content-class.html" . }}"{{ with .Params.feature_image }} style="background-image: url('{{ . }}');"{{ end }}>
@@ -55,7 +70,7 @@
             {{- with $.Site.GetPage (printf "/people/%s" (index $.Params.people 0) | urlize) }}
               {{- .Scratch.Set "show_link" 1 }}
               {{- .Scratch.Set "show_stats" 0 }}
-{{ .Render "summary" }}
+          {{ .Render "summary" }}
             {{- end }}
           {{- end }}
         {{- end }}
@@ -69,25 +84,32 @@
     </article>
     <nav id="links" class="main-column {{ partial "content-class.html" . }}" itemscope itemtype="http://schema.org/SiteNavigationElement">
       <ul class="nav" itemscope itemtype="http://schema.org/ItemList">
+        <meta itemprop="numberOfItems" content="{{ $total }}">
         {{- with .PrevInSection }}
         <li class="previous" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-          <a href="{{ .RelPermalink }}" rel="prev">
+          <meta itemprop="position" content="{{ add $position 1 }}">
+          <a href="{{ .RelPermalink }}" rel="prev" itemprop="url">
             <section class="teaser">
               <i class="ic ic-arrow-left"></i>
-              <h2 class="headline">{{ .Title }}</h2>
-              <p class="excerpt">{{ .Description | default .Summary | truncate 150 }}</p>
+              <h2 class="headline" itemprop="name">{{ .Title }}</h2>
+              <p class="excerpt" itemprop="description">{{ .Description | default .Summary | truncate 150 }}</p>
             </section>
           </a>
+        {{- else }}
+        <li class="previous">
         {{- end }}
         {{- with .NextInSection }}
         <li class="next" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-          <a href="{{ .RelPermalink }}" rel="next">
+          <meta itemprop="position" content="{{ sub $position 1 }}">
+          <a href="{{ .RelPermalink }}" rel="next" itemprop="url">
             <section class="teaser">
               <i class="ic ic-arrow-right"></i>
-              <h2 class="headline">{{ .Title }}</h2>
-              <p class="excerpt">{{ .Description | default .Summary | truncate 150 }}</p>
+              <h2 class="headline" itemprop="name">{{ .Title }}</h2>
+              <p class="excerpt" itemprop="description">{{ .Description | default .Summary | truncate 150 }}</p>
             </section>
           </a>
+        {{- else }}
+        <li class="next">
         {{- end }}
       </ul>
     </nav>
