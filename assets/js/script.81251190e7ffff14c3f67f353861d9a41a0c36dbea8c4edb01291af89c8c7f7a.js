@@ -1,4 +1,5 @@
-(function() {
+(function(window, undefined) {
+    'use strict';
 
     var htmlClass = document.querySelector('html').classList
 
@@ -79,4 +80,5 @@
     }
 
     buildShareButtons()
-})();
+
+})(Function('return this')());
