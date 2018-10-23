@@ -32,7 +32,7 @@
                   <li class="location ic ic-location" itemprop="address">{{ . }}
                   {{- end }}
                   {{- with .Params.website }}
-                  <li class="website ic ic-link"><a href="{{ . }}" rel="noopener external" itemprop="sameAs">{{ i18n "Website" }}</a>
+                  <li class="website ic ic-link"><a href="{{ . }}" rel="noopener external" itemprop="{{ cond $show_link "sameAs" "url" }}">{{ i18n "Website" }}</a>
                   {{- end }}
                   {{- with .Params.twitter }}
                   <li class="twitter ic ic-twitter"><a target="_blank" href="https://twitter.com/{{ . }}" rel="noopener external nofollow noreferrer" referrerpolicy="no-referrer" itemprop="sameAs">Twitter</a>

@@ -25,13 +25,16 @@
   {{- end }}
 {{- end }}
   <main itemscope itemtype="{{ $itemtype }}">
+    {{- with .Params.feature_image }}
+      {{- with $.Resources.GetMatch . }}
+    <meta itemprop="image" content="{{ .Permalink }}">
+      {{- end }}
+    {{- end }}
+    {{- range $itemprop, $content := .Params.meta }}
+    <meta itemprop="{{ $itemprop }}" content="{{ $content }}">
+    {{- end }}
     <article class="rows">
       <header id="header" class="main-column {{ partial "content-class.html" . }}"{{ with .Params.feature_image }} style="background-image: url('{{ . }}');"{{ end }}>
-        {{- with .Params.feature_image }}
-          {{- with $.Resources.GetMatch . }}
-        <meta itemprop="image" content="{{ .RelPermalink }}">
-          {{- end }}
-        {{- end }}
         <h1 class="headline" itemprop="name{{ if not $is_event }} headline{{ end }}">{{ .Title }}</h1>
         <div class="meta">
           {{- if .Params.people }}
@@ -63,6 +66,7 @@
           </aside>
         </div>
         {{- with .Params.people }}
+          {{- $.Scratch.Set "itemprop" (cond $is_event "contributor" "author") }}
           {{- if ge (len .) 2 }}
         <footer class="multiple-authors">
           <p class="note">{{ i18n "ThisPostWasACollaboration" }}</p>
@@ -75,6 +79,7 @@
           {{ .Render "summary" }}
             {{- end }}
           {{- end }}
+          {{- $.Scratch.Delete "itemprop" }}
         {{- end }}
         {{- /*
         <section class="comments">
