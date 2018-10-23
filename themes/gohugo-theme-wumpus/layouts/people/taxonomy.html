@@ -4,6 +4,8 @@
    *
    */}}
 
+{{ define "title" }}{{ with .Params.name }} | {{ with $.Params.prefix }}{{ . }} {{ end }}{{ . }}{{ end }}{{ end }}
+
 {{ define "main" }}
 {{- $paginator := .Paginate .Pages }}
   <main itemscope itemtype="http://schema.org/Person">

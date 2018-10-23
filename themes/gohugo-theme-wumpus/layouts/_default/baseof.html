@@ -1,6 +1,6 @@
 {{- $production := not .Site.IsServer -}}
 <!DOCTYPE html>
-<html lang="{{ $.Site.LanguageCode | default "en" }}" itemscope itemtype="https://schema.org/WebSite">
+<html lang="{{ $.Site.LanguageCode | default "en" }}">
 {{- /*
 schema.org/
     WebPage
@@ -11,7 +11,7 @@ schema.org/
 
     BlogPosting
 
-    Event
+    Event             <-- requires "location"
       tag = Events
       tag = Outreach
     NewsArticle
@@ -38,6 +38,8 @@ Thing         Event         BlogPosting       SoftwareApplication
 name          name          headline          headline
 description   description   description       description
                             articleBody
+              location      contentLocation   contentLocation
+              contributor   authors           author
 
 
 */}}
@@ -45,7 +47,7 @@ description   description   description       description
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <title>{{ block "title" . }}{{ .Site.Title }}{{ with .Params.Title }} | {{ . }}{{ end }}{{ end }}</title>
+  <title>{{ .Site.Title }}{{ block "title" . }}{{ with .Params.Title }} | {{ . }}{{ end }}{{ end }}</title>
   {{- with cond .IsHome .Site.Params.Description .Description }}
   <meta name="description" content="{{ . }}">
   {{- end }}
