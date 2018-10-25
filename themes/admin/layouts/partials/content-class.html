@@ -1,1 +1,0 @@
-{{ if .IsHome }}home{{ else }}{{ .Type }}{{ end }} {{ cond .IsNode "node" "page" }}{{ with (cond .IsHome .Site.Params.feature_image .Params.feature_image) }} has-cover{{ end }}{{ with .Params.featured }} featured{{ end }}

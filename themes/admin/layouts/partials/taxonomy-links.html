@@ -1,1 +1,0 @@
-{{ range $i, $term := (index .Params .taxonomy) }}{{ if $i }}{{ $.separator | default ", " }}{{ end }}{{ with $.Site.GetPage (printf "/%s/%s" $.taxonomy $term | urlize) }}{{ .Render ($.template | default "link") }}{{ else }}<a href="{{ printf "/%s/%s" $.taxonomy $term | urlize }}">{{ $term }}</a>{{ end }}{{ end }}
