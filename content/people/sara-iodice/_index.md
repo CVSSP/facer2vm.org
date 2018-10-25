@@ -1,7 +1,6 @@
 ---
 name: Sara Iodice
 prefix: Ms
-email: s.iodice16@imperial.ac.uk
 profile_image: profile_image.jpg
 bio: ""
 location: London, UK

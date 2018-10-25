@@ -1,6 +1,5 @@
 ---
 name: Patrik Huber
-email: p.huber@surrey.ac.uk
 profile_image: profile_image.jpg
 website: https://patrikhuber.ch/
 location: Guildford, UK

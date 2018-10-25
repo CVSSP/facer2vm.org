@@ -48,13 +48,13 @@ The submission deadline for all papers is <strong>07 FEB 2018</strong>.</p>
 </ul>
 <h3 id="organisers">Organisers</h3>
 <ul>
-<li>Dr. <a href="https://sites.google.com/view/fengzhenhua">Zhenhua Feng</a>, University of Surrey, UK (<a href="mailto:z.feng@surrey.ac.uk">z.feng@surrey.ac.uk</a>)</li>
-<li>Dr. <a href="http://www.patrikhuber.ch/">Patrik Huber</a>, University of Surrey, UK (<a href="mailto:p.huber@surrey.ac.uk">p.huber@surrey.ac.uk</a>)</li>
-<li>Prof. <a href="https://www.stir.ac.uk/people/11587">Peter Hancock</a>, University of Stirling, UK (<a href="mailto:p.j.b.hancock@stir.ac.uk">p.j.b.hancock@stir.ac.uk</a>)</li>
-<li>Prof. <a href="https://www.surrey.ac.uk/cvssp/people/josef_kittler/">Josef Kittler</a>, University of Surrey, UK (<a href="mailto:j.kittler@surrey.ac.uk">j.kittler@surrey.ac.uk</a>)</li>
-<li>Dr. <a href="https://paulkoppen.com/">Paul Koppen</a>, University of Surrey, UK (<a href="mailto:p.koppen@surrey.ac.uk">p.koppen@surrey.ac.uk</a>)</li>
-<li>Prof. <a href="https://scholar.google.com/citations?user=5IST34sAAAAJ&amp;hl=en">Xiaojun Wu</a>, Jiangnan University, China (<a href="mailto:wu_xiaojun@jiangnan.edu.cn">wu_xiaojun@jiangnan.edu.cn</a>)</li>
-<li>Mr. Hefeng Yin, Jiangan University, China (<a href="mailto:yinhefeng@126.com">yinhefeng@126.com</a>)</li>
+<li>Dr. <a href="https://sites.google.com/view/fengzhenhua">Zhenhua Feng</a>, University of Surrey, UK (z.feng at surrey.ac.uk)</li>
+<li>Dr. <a href="http://www.patrikhuber.ch/">Patrik Huber</a>, University of Surrey, UK (p.huber at surrey.ac.uk)</li>
+<li>Prof. <a href="https://www.stir.ac.uk/people/11587">Peter Hancock</a>, University of Stirling, UK (p.j.b.hancock at stir.ac.uk)</li>
+<li>Prof. <a href="https://www.surrey.ac.uk/cvssp/people/josef_kittler/">Josef Kittler</a>, University of Surrey, UK (j.kittler at surrey.ac.uk)</li>
+<li>Dr. <a href="https://paulkoppen.com/">Paul Koppen</a>, University of Surrey, UK (p.koppen at surrey.ac.uk)</li>
+<li>Prof. <a href="https://scholar.google.com/citations?user=5IST34sAAAAJ&amp;hl=en">Xiaojun Wu</a>, Jiangnan University, China (wu_xiaojun at jiangnan.edu.cn)</li>
+<li>Mr. Hefeng Yin, Jiangan University, China (yinhefeng at 126.com)</li>
 </ul>
 <h3 id="programcommittee">Program Committee</h3>
 <ul>

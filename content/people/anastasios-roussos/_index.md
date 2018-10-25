@@ -1,7 +1,6 @@
 ---
 name: Anastasios Roussos
 prefix: Dr
-email: troussos@imperial.ac.uk
 profile_image: profile_image.jpg
 bio: >-
   Lecturer in Computer Science, <a href="//www.exeter.ac.uk">University of

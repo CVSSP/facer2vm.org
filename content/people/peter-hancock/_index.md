@@ -1,7 +1,6 @@
 ---
 name: Peter Hancock
 prefix: Professor
-email: p.j.b.hancock@stir.ac.uk
 profile_image: profile_image.jpg
 feature_image: feature_image.jpg
 bio: >-

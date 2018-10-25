@@ -1,7 +1,6 @@
 ---
 name: Krystian Mikolajczyk
 prefix: Dr
-email: k.mikolajczyk@imperial.ac.uk
 profile_image: profile_image.jpg
 feature_image: feature_image.jpg
 bio: >-

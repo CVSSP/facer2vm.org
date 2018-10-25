@@ -1,7 +1,6 @@
 ---
 name: Tae-Kyun Kim
 prefix: Dr
-email: tk.kim@imperial.ac.uk
 profile_image: profile_image.jpg
 feature_image: feature_image.jpg
 bio: >-

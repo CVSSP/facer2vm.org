@@ -1,7 +1,6 @@
 ---
 name: Stefanos Zafeiriou
 prefix: Dr
-email: s.zafeiriou@imperial.ac.uk
 profile_image: profile_image.jpg
 feature_image: feature_image.jpg
 bio: >-

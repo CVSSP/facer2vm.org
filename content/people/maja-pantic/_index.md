@@ -1,7 +1,6 @@
 ---
 name: Maja Pantic
 prefix: Professor
-email: m.pantic@imperial.ac.uk
 profile_image: profile_image.jpg
 feature_image: feature_image.jpg
 bio: >-

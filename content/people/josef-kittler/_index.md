@@ -1,7 +1,6 @@
 ---
 name: Josef Kittler
 prefix: Professor
-email: j.kittler@surrey.ac.uk
 profile_image: profile_image.jpg
 feature_image: feature_image.jpg
 bio: >-
