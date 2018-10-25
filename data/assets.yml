@@ -1,2 +1,4 @@
 scss:
   - assets/sass/facer2vm.scss
+js:
+  - assets/js/admin.js

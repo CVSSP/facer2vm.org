@@ -81,9 +81,23 @@ description   description   description       description
   {{- /*    Site scripts
        * ===============
        */}}
-  {{- $wumpus := resources.Get "assets/js/wumpus.js" }}
-  {{- $script := slice $wumpus | resources.Concat "assets/js/script.js" | fingerprint }}
+  {{- if $production }}
+    {{- /* Combine all resources into one. */}}
+    {{- $js := resources.Get "assets/js/wumpus.js" | slice }}
+    {{- /* range .Site.Data.assets.js }}
+      {{- $js = $js | append (resources.Get . | slice) }}
+    {{- end */}}
+    {{- $script := $js | resources.Concat "assets/js/script.js" | fingerprint }}
   <script defer src="{{ $script.Permalink }}" integrity="{{ $script.Data.Integrity }}"></script>
+  {{- else }}
+    {{- /* Spell out the resources separately. */}}
+    {{- $script := resources.Get "assets/js/wumpus.js" | fingerprint }}
+  <script defer src="{{ $script.Permalink }}" integrity="{{ $script.Data.Integrity }}"></script>
+    {{- range .Site.Data.assets.js }}
+      {{- $script := resources.Get . | fingerprint }}
+  <script defer src="{{ $script.Permalink }}" integrity="{{ $script.Data.Integrity }}"></script>
+    {{- end }}
+  {{- end }}
 
   {{- with .Site.Params.favicon }}
   <link rel="shortcut icon" href="/{{ . }}">
@@ -99,6 +113,7 @@ description   description   description       description
 
   {{- /* NOTE: These Hugo Internal Templates can be found starting at https://github.com/spf13/hugo/blob/master/tpl/tplimpl/template_embedded.go#L158 */}}
   {{ template "_internal/opengraph.html" . -}}
+  {{- /* Manually add a few images ignored by the internal opengraph template. */}}
   {{- range slice "profile_image" "feature_image" }}
     {{- with index $.Params . }}
       {{- with $.Resources.GetMatch . }}

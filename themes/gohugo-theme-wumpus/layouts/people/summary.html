@@ -1,4 +1,4 @@
-{{- $show_link := .Scratch.Get "show_link" | default 1 | int | ne 0 -}}
+{{- $show_link := .Scratch.Get "show_link" | int | ne 0 -}}
 {{- $show_stats := .Scratch.Get "show_stats" -}}
           <section class="{{ partial "content-class.html" . }} columns summary">
             <figure class="profile-image">
