@@ -99,8 +99,6 @@
         function embedData() {
             var script = document.createElement('script')
             script.setAttribute('type', meta.type)
-            script.setAttribute('text', this.responseText)
-            // Don't know which one is preferred (supported by search engines)
             script.appendChild(document.createTextNode(this.responseText))
             document.head.appendChild(script)
         }
