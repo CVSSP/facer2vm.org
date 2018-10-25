@@ -12,6 +12,8 @@ tags:
   - Outreach
 meta:
   location: CVSSP, University of Surrey, UK
+aliases:
+  - /nhk-filming-at-cvssp/
 ---
 
 During the weekend, the Japanese TV Broadcaster NHK came to film an experiment
