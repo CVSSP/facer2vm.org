@@ -81,4 +81,31 @@
 
     buildShareButtons()
 
+    /* ======================================================================
+       Structured data (JSON-LD).
+       ====================================================================== */
+
+    function embedJsonLd() {
+        var meta = document.querySelector('link[type="application/ld+json"]')
+        var request
+
+        if (meta) {
+            request = new XMLHttpRequest()
+            request.addEventListener('load', embedData)
+            request.open('GET', meta.href)
+            request.send()
+        }
+
+        function embedData() {
+            var script = document.createElement('script')
+            script.setAttribute('type', meta.type)
+            script.setAttribute('text', this.responseText)
+            // Don't know which one is preferred (supported by search engines)
+            script.appendChild(document.createTextNode(this.responseText))
+            document.head.appendChild(script)
+        }
+    }
+
+    embedJsonLd()
+
 })(Function('return this')());
