@@ -1,7 +1,7 @@
 
   {{- range $k, $v := .Params.meta }}
-    {{- if eq $k "location" }}
-  {{- partial "location.jsonld" $v }}
+    {{- if in (slice "location" "contentlocation") $k }}
+  {{- partial (printf "%s.jsonld" $k) $v }}
     {{- else }}
   "{{ $k }}": {{ $v | jsonify }},
     {{- end }}

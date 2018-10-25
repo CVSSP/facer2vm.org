@@ -1,0 +1,7 @@
+{{- /*
+     * Produce a Place declaration from a string.
+     */}}
+{{- $parts := split . "," }}
+{{- $name := index $parts 0 }}
+{{- $address := trim (delimit ($parts | after 1) "," | default .) " \n\r\t" }}
+  "contentLocation": {{ partial "Place.jsonld" (dict "name" $name "address" $address) }},
