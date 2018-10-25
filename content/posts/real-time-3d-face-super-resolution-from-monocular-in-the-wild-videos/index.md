@@ -42,6 +42,6 @@ scenarios.
 
 
 
-[ABSTRACT]: //ln.facer2vm.org/siggraph2016_abstract
-[POSTER]: //ln.facer2vm.org/siggraph2016_poster
+[ABSTRACT]: https://ln.facer2vm.org/siggraph2016_abstract
+[POSTER]: https://ln.facer2vm.org/siggraph2016_poster
 [SIGGRAPH]: http://s2016.siggraph.org/posters

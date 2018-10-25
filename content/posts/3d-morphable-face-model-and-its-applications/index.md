@@ -50,5 +50,5 @@ Monday 13 June from 9am to 12 noon.*
 
 
 [ICB]: http://icb2016.hh.se/
-[SLIDES_A]: //ln.facer2vm.org/slides-icb2016-a_pdf
-[SLIDES_B]: //ln.facer2vm.org/slides-icb2016-b_pdf
+[SLIDES_A]: https://ln.facer2vm.org/slides-icb2016-a_pdf
+[SLIDES_B]: https://ln.facer2vm.org/slides-icb2016-b_pdf

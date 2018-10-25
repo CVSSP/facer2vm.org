@@ -48,6 +48,6 @@ WP Koppen, WJ Christmas, DJM Crouch, WF Bodmer, JV Kittler, Extending Non-negati
 
 
 
-[FULLTEXT]: //ln.facer2vm.org/icb2016-3dnmf_pdf
+[FULLTEXT]: https://ln.facer2vm.org/icb2016-3dnmf_pdf
 [ICB]: http://icb2016.hh.se/
-[POSTER]: //ln.facer2vm.org/icb2016-3dnmf_poster
+[POSTER]: https://ln.facer2vm.org/icb2016-3dnmf_poster

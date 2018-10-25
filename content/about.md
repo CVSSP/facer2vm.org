@@ -41,6 +41,6 @@ EP/N007743/1][GRANT] is gratefully acknowledged.
 
 
 [GRANT]: http://gow.epsrc.ac.uk/NGBOViewGrant.aspx?GrantRef=EP/N007743/1
-[IMPERIAL]: //www.imperial.ac.uk/
-[STIRLING]: //www.stir.ac.uk/
-[SURREY]: //www.surrey.ac.uk/
+[IMPERIAL]: https://www.imperial.ac.uk/
+[STIRLING]: https://www.stir.ac.uk/
+[SURREY]: https://www.surrey.ac.uk/

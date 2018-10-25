@@ -41,4 +41,4 @@ applications, Proc. Conf. on  Articulated Motion and Deformable Objects, pp
 
 
 [AMDO]: http://amdo2016.uib.es/index.php/invited-speakers/
-[FULLTEXT]: //ln.facer2vm.org/amdo2016-3dmfm_pdf
+[FULLTEXT]: https://ln.facer2vm.org/amdo2016-3dmfm_pdf

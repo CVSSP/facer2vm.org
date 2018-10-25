@@ -10,7 +10,6 @@ tags:
   - Events
 meta:
   location: Manchester Metropolitan University Business School - All Saints Campus Oxford Road, Manchester, M156BH
-  startDate: 2016-06-23T08:30:00.000Z
   endDate: 2016-06-23T17:00:00.000Z
 ---
 
@@ -45,5 +44,5 @@ website][WEBSITE].
 
 
 
-[REGISTER]: //ln.facer2vm.org/advancements-in-face-research_eventbrite
-[WEBSITE]: //ln.facer2vm.org/advancements-in-face-research_website
+[REGISTER]: https://ln.facer2vm.org/advancements-in-face-research_eventbrite
+[WEBSITE]: https://ln.facer2vm.org/advancements-in-face-research_website

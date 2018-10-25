@@ -8,7 +8,7 @@ bio: >-
   Principal Investigator FACER2VM.
   Distinguished Professor, Centre for Vision, Speech and Signal Processing (CVSSP),
   <a href="//www.surrey.ac.uk/">University of Surrey</a>
-website: //www.surrey.ac.uk/cvssp/people/josef_kittler/
+website: https://www.surrey.ac.uk/cvssp/people/josef_kittler/
 location: Guildford, UK
 date: 2016-01-01T08:06:00.000Z
 groups:
@@ -33,4 +33,4 @@ Professor Kittler is Principal Investigator on the FACER2VM project.
 
 
 
-[CVSSP]: //www.surrey.ac.uk/cvssp/
+[CVSSP]: https://www.surrey.ac.uk/cvssp/

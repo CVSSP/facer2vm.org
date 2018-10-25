@@ -17,7 +17,6 @@ tags:
   - Events
 meta:
   location: 35 BA 00, CVSSP, University of Surrey, UK
-  startDate: 2016-09-15T10:00:00.000Z
   endDate: 2016-09-16T17:30:00.000Z
 ---
 
@@ -59,6 +58,6 @@ attendance][REGISTER].
 
 
 
-[REGISTER]: //goo.gl/8Mwc6o
-[PROGRAMME]: //ln.facer2vm.org/facer2vm-ws-ufr_agenda
-[CAMPUSMAP]: //ln.facer2vm.org/surrey-campus-map
+[REGISTER]: https://goo.gl/8Mwc6o
+[PROGRAMME]: https://ln.facer2vm.org/facer2vm-ws-ufr_agenda
+[CAMPUSMAP]: https://ln.facer2vm.org/surrey-campus-map

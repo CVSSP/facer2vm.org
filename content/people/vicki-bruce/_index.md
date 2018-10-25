@@ -6,7 +6,7 @@ bio: >-
   Professor of Psychology,
   School of Psychology,
   <a href="//www.ncl.ac.uk/" rel="noopener external">Newcastle University</a>
-website: //www.ncl.ac.uk/psychology/staff/profile/vickibruce.html
+website: https://www.ncl.ac.uk/psychology/staff/profile/vickibruce.html
 location: Newcastle, UK
 date: 2016-01-01T09:01:00.000Z
 groups:

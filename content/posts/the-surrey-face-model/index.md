@@ -18,5 +18,5 @@ website][SFM].
 
 
 
-[CVSSP]: //surrey.ac.uk/cvssp/
+[CVSSP]: https://surrey.ac.uk/cvssp/
 [SFM]: http://www.cvssp.org/faceweb/3dmm/facemodel/

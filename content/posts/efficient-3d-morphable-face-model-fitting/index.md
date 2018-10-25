@@ -46,6 +46,6 @@ Morphable Face Model Fitting, Pattern Recognition, 67:366-367, 2017
 
 
 
-[DOI]: //dx.doi.org/10.1016/j.patcog.2017.02.007
-[FULLTEXT]: //ln.facer2vm.org/pr2017-eso_pdf
-[PR]: //www.journals.elsevier.com/pattern-recognition
+[DOI]: https://dx.doi.org/10.1016/j.patcog.2017.02.007
+[FULLTEXT]: https://ln.facer2vm.org/pr2017-eso_pdf
+[PR]: https://www.journals.elsevier.com/pattern-recognition

@@ -7,7 +7,7 @@ bio: >-
   Project Manager FACER2VM. Research Fellow, Centre for Vision, Speech and
   Signal Processing (CVSSP), <a href="//www.surrey.ac.uk/">University of
   Surrey</a>
-website: //paulkoppen.com/
+website: https://paulkoppen.com/
 location: Guildford, UK
 date: 2017-10-10T22:13:47.000Z
 groups:
