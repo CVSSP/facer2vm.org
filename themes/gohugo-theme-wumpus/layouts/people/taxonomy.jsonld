@@ -1,0 +1,16 @@
+{{- /*
+     * A person.
+     */}}
+
+{{ define "main" }}
+  "@type": "Person",
+  {{- partial "id.jsonld" . }}
+  {{- with .Params.prefix }}
+  "honorificPrefix": "{{ . }}",
+  {{- end }}
+  "name": "{{ .Params.name }}",
+  {{- partial "description.jsonld" . }}
+  {{- partial "image.jsonld" . }}
+  {{- partial "url.jsonld" . }}
+  "knowsAbout": {{- partial "ItemList.jsonld" .Pages }},
+{{- end }}

@@ -1,5 +1,5 @@
 ---
 title: "Software"
-itemtype: http://schema.org/SoftwareApplication
+itemtype: SoftwareApplication
 headless: true
 ---

@@ -1,10 +1,10 @@
 {{- $show_link := .Scratch.Get "show_link" | default 1 | int | ne 0 -}}
 {{- $show_stats := .Scratch.Get "show_stats" -}}
-          <section class="{{ partial "content-class.html" . }} columns summary"{{ if not (.Scratch.Get "no_item" | default 0) }} itemprop="{{ .Scratch.Get "itemprop" | default "item" }}" itemscope itemtype="http://schema.org/Person"{{ end }}>
+          <section class="{{ partial "content-class.html" . }} columns summary">
             <figure class="profile-image">
               {{- with .Params.profile_image }}
                 {{- with ($.Resources.GetMatch .) }}
-              <img src="{{ .RelPermalink }}" alt="{{ $.Params.name }}" itemprop="image">
+              <img src="{{ .RelPermalink }}" alt="{{ $.Params.name }}">
                 {{- end }}
               {{- end }}
             </figure>
@@ -12,18 +12,18 @@
               <header>
                 <h2 class="name">
                   {{- if $show_link }}
-                  <a href="{{ .RelPermalink }}" itemprop="url">{{ with .Params.prefix }}<span itemprop="honorificPrefix">{{ . }}</span> {{ end }}<span itemprop="name">{{ .Params.name }}</span></a>
+                  <a href="{{ .RelPermalink }}">{{ with .Params.prefix }}{{ . }} {{ end }}{{ .Params.name }}</a>
                   {{- else }}
-                  {{ with .Params.prefix }}<span itemprop="honorificPrefix">{{ . }}</span> {{ end }}<span itemprop="name">{{ .Params.name }}</span>
+                  {{ with .Params.prefix }}{{ . }} {{ end }}{{ .Params.name }}
                   {{- end }}
                 </h2>
               </header>
               {{- if $show_link }}
-              <blockquote class="about" cite="{{ .RelPermalink }}" itemprop="description">
+              <blockquote class="about" cite="{{ .RelPermalink }}">
                 <p>{{ .Params.bio | safeHTML }}
               </blockquote>
               {{- else }}
-              <div class="about" itemprop="description">
+              <div class="about">
                 <p>{{ .Params.bio | safeHTML }}
               </div>
               {{- end }}
@@ -33,16 +33,16 @@
                   <li class="stats ic ic-pencil">{{ partial "num-pages.html" .Pages }}
                   {{- end }}
                   {{- with .Params.location }}
-                  <li class="location ic ic-location" itemprop="workLocation" itemscope itemtype="http://schema.org/Place"><span itemprop="address">{{ . }}</span>
+                  <li class="location ic ic-location">{{ . }}
                   {{- end }}
                   {{- with .Params.website }}
-                  <li class="website ic ic-link"><a href="{{ . }}" rel="noopener external" itemprop="{{ cond $show_link "sameAs" "url" }}">{{ i18n "Website" }}</a>
+                  <li class="website ic ic-link"><a href="{{ . }}" rel="noopener external">{{ i18n "Website" }}</a>
                   {{- end }}
                   {{- with .Params.twitter }}
-                  <li class="twitter ic ic-twitter"><a target="_blank" href="https://twitter.com/{{ . }}" rel="noopener external nofollow noreferrer" referrerpolicy="no-referrer" itemprop="sameAs">Twitter</a>
+                  <li class="twitter ic ic-twitter"><a target="_blank" href="https://twitter.com/{{ . }}" rel="noopener external nofollow noreferrer" referrerpolicy="no-referrer">Twitter</a>
                   {{- end }}
                   {{- with .Params.facebook }}
-                  <li class="facebook ic ic-facebook"><a target="_blank" href="https://facebook.com/{{ . }}" rel="noopener external nofollow noreferrer" referrerpolicy="no-referrer" itemprop="sameAs">Facebook</a>
+                  <li class="facebook ic ic-facebook"><a target="_blank" href="https://facebook.com/{{ . }}" rel="noopener external nofollow noreferrer" referrerpolicy="no-referrer">Facebook</a>
                   {{- end }}
                 </ul>
               </footer>

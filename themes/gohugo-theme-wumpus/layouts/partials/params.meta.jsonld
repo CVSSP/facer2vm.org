@@ -1,0 +1,8 @@
+
+  {{- range $k, $v := .Params.meta }}
+    {{- if eq $k "location" }}
+  {{- partial "location.jsonld" $v }}
+    {{- else }}
+  "{{ $k }}": {{ $v | jsonify }},
+    {{- end }}
+  {{- end }}

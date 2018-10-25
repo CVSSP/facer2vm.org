@@ -1,5 +1,5 @@
 ---
 title: "Outreach"
-itemtype: http://schema.org/Event
+itemtype: Event
 headless: true
 ---

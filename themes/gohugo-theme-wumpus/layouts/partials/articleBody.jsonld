@@ -1,0 +1,2 @@
+
+  "articleBody": {{ " \n\r\t" | trim .Plain | jsonify }},

@@ -1,0 +1,19 @@
+{{- /*
+     * A company.
+     */}}
+
+{{ define "main" }}
+  "@type": "Organization",
+  {{- partial "id.jsonld" . }}
+  "name": "{{ .Title }}",
+  {{- with .Params.profile_image }}
+    {{- with $.Resources.GetMatch . }}
+  "logo": {{ .Permalink | jsonify }},
+    {{- else }}
+  "logo": {{ . | absURL | jsonify }},
+    {{- end }}
+  {{- end }}
+  {{- partial "description.jsonld" . }}
+  {{- partial "image.jsonld" . }}
+  {{- partial "url.jsonld" . }}
+{{- end }}

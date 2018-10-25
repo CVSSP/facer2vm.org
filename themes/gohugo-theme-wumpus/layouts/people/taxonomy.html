@@ -8,34 +8,29 @@
 
 {{ define "main" }}
 {{- $paginator := .Paginate .Pages }}
-  <main itemscope itemtype="http://schema.org/Person">
+  <main>
     <article class="rows">
       <header id="header" class="main-column {{ partial "content-class.html" . }}"{{ with .Params.feature_image }} style="background-image: url('{{ . }}');"{{ end }}>
-        {{- with .Params.feature_image }}
-        <meta itemprop="image" content="{{ . }}">
-        {{- end }}
       </header>
       <div id="squealer"></div>
       <div id="main" class="main-column {{ partial "content-class.html" . }}">
         <div class="header">
           {{- .Scratch.Set "show_link" 0 }}
           {{- .Scratch.Set "show_stats" 1 }}
-          {{- .Scratch.Set "no_item" 1 }}
           {{ .Render "summary" }}
-          {{- .Scratch.Delete "no_item" }}
         </div>
         {{- with .Content }}
-        <div class="content" itemprop="description">
+        <div class="content">
           {{ . }}
         </div>
         {{- end }}
       </div>
     </article>
-    <nav id="links" class="main-column {{ partial "content-class.html" . }}" itemscope itemtype="http://schema.org/SiteNavigationElement">
+    <nav id="links" class="main-column {{ partial "content-class.html" . }}">
       {{- if $paginator.TotalNumberOfElements }}
-      <ul class="list" itemscope itemtype="http://schema.org/ItemList">
+      <ul class="list">
         {{- range $paginator.Pages }}
-        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+        <li>
           {{- .Scratch.Set "show_link" (.Params.has_page | default 1) }}
           {{- .Scratch.Set "show_stats" (ne $.Kind "taxonomyTerm") }}
           {{ .Render "summary" }}

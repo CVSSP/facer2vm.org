@@ -1,5 +1,5 @@
 ---
 title: "Publications"
-itemtype: http://schema.org/ScholarlyArticle
+itemtype: ScholarlyArticle
 headless: true
 ---

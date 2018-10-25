@@ -1,0 +1,12 @@
+
+  "@type": "Event",
+  {{- partial "id.jsonld" . }}
+  "name": "{{ .Title }}",
+  {{- partial "description.jsonld" . }}
+  {{- partial "image.jsonld" . }}
+  {{- partial "url.jsonld" . }}
+  {{- .Scratch.Set "author" "contributor" }}
+  {{- partial "author.jsonld" . }}
+  {{- .Scratch.Delete "author" }}
+  "startDate": "{{ .PublishDate.Format "2006-01-02" }}",
+  {{- partial "params.meta.jsonld" . }}

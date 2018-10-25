@@ -1,5 +1,5 @@
 ---
 title: "In the News"
-itemtype: http://schema.org/NewsArticle
+itemtype: NewsArticle
 headless: true
 ---

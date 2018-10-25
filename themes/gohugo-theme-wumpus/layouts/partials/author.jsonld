@@ -1,0 +1,9 @@
+
+  "{{ .Scratch.Get "author" | default "author" }}": [
+    {{- range $i, $name := .Params.people }}
+      {{- if $i }},{{- end }}
+      {{- with $.Site.GetPage (printf "/people/%s" $name | urlize) | default (dict "name" $name) }}
+        {{- partial "Person.jsonld" . }}
+      {{- end }}
+    {{- end -}}
+  ],

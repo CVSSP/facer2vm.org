@@ -1,0 +1,17 @@
+{{- /*
+     * ItemList with urls pointing to the elements.
+     *
+     * Input is a list (of pages).
+     */ -}}
+  {
+    "@type": "ItemList",
+    "itemListElement": [
+      {{- range $i, $item := . }}
+      {{- if $i }}, {{ end }}{
+        "@type": "ListItem",
+        "position": {{ add $i 1 }},
+        "url": "{{ $item.Permalink }}"
+      }
+      {{- end }}
+    ]
+  }

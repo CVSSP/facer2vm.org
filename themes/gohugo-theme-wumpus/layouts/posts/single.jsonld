@@ -1,0 +1,23 @@
+{{- /*
+     * A post.
+     */}}
+
+{{ define "main" }}
+  {{- /*
+       * Choose template based on schema.org item type.
+       */}}
+  {{- $itemtype := "BlogPosting" }}
+  {{- with index .Params.tags 0 }}
+    {{- with . | urlize | printf "/tags/%s" | $.Site.GetPage }}
+      {{- with .Params.itemtype }}
+        {{- $itemtype = . }}
+      {{- end }}
+    {{- end }}
+  {{- end }}
+
+  {{- if eq "Event" $itemtype }}
+  {{- .Render "single_event" }}
+  {{- else }}
+  {{- .Render "single_article" }}
+  {{- end }}
+{{- end }}

@@ -1,0 +1,15 @@
+{{- /*
+     * Single pages, like about.
+     */}}
+
+{{ define "main" }}
+  "@type": "WebPage",
+  {{- partial "id.jsonld" . }}
+  {{- partial "publisher.jsonld" . }}
+  "name": "{{ .Title }}",
+  "headline": "{{ .Title }}",
+  {{- partial "description.jsonld" . }}
+  {{- partial "image.jsonld" . }}
+  {{- partial "keywords.jsonld" . }}
+  {{- partial "url.jsonld" . }}
+{{- end }}

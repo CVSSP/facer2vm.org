@@ -1,0 +1,19 @@
+{{- $sameas := slice }}
+{{- if not .IsHome }}
+  {{- with .Params.facebook }}{{- $sameas = $sameas | append (printf "https://www.facebook.com/%s" .) }}{{- end }}
+  {{- with .Params.google }}{{- $sameas = $sameas | append (printf "https://plus.google.com/%s" .) }}{{- end }}
+  {{- with .Params.instagram }}{{- $sameas = $sameas | append (printf "https://instagram.com/%s" .) }}{{- end }}
+  {{- with .Params.linkedin }}{{- $sameas = $sameas | append (printf "https://www.linkedin.com/in/%s" .) }}{{- end }}
+  {{- with .Params.twitter }}{{- $sameas = $sameas | append (printf "https://twitter.com/%s" .) }}{{- end }}
+{{- end }}
+
+{{- $url := .Permalink }}
+{{- with .Params.website }}
+  {{- $sameas = $sameas | append $url }}
+  {{- $url = . }}
+{{- end }}
+
+  {{- with $sameas }}
+  "sameAs": {{ . | jsonify }},
+  {{- end }}
+  "url": "{{ $url }}",

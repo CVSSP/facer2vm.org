@@ -48,12 +48,12 @@ description   description   description       description
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
   <title>{{ .Site.Title }}{{ block "title" . }}{{ with .Params.Title }} | {{ . }}{{ end }}{{ end }}</title>
-  {{- with cond .IsHome .Site.Params.Description .Description }}
+  {{- with .Description }}
   <meta name="description" content="{{ . }}">
   {{- end }}
 
   <meta name="HandheldFriendly" content="True">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
   {{- /*    Style sheets
        * ===============
@@ -86,13 +86,15 @@ description   description   description       description
   <script defer src="{{ $script.Permalink }}" integrity="{{ $script.Data.Integrity }}"></script>
 
   {{- with .Site.Params.favicon }}
-  <link rel="shortcut icon" href="/{{ . }}" type="image/x-icon">
+  <link rel="shortcut icon" href="/{{ . }}">
+  <link rel="icon" type="image/png" href="/{{ . }}-192x192.png" sizes="192x192">
+  <link rel="apple-touch-icon" href="/{{ . }}-180x180.png" sizes="180x180">
   {{- end }}
   {{- with .Permalink }}
   <link rel="canonical" href="{{ . }}">
   {{- end }}
-  {{- if .RSSLink }}
-  <link rel="alternate" href="{{ .RSSLink }}" type="application/rss+xml" title="{{ .Site.Title }}">
+  {{- range .AlternativeOutputFormats }}
+  {{ printf `<link rel="%s" type="%s" href="%s" title="%s">` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
   {{- end }}
 
   {{- /* NOTE: These Hugo Internal Templates can be found starting at https://github.com/spf13/hugo/blob/master/tpl/tplimpl/template_embedded.go#L158 */}}
@@ -118,15 +120,15 @@ description   description   description       description
        *
        */}}
   {{- block "main" . }}
-  <main itemscope itemtype="http://schema.org/BlogPosting">
+  <main>
     <article>
       <header id="header">
-        <h1 itemprop="name headline">title</h1>
+        <h1>title</h1>
         ...
       </header>
 
       <div id="main">
-        <div class="content" itemprop="articleBody"><!-- or "description" for non-articles -->
+        <div class="content">
           {{ .Content }}
         </div>
 
@@ -216,6 +218,5 @@ description   description   description       description
   <label for="menu-switch" class="close-button button">{{i18n "Close"}}</label>
   <input type="checkbox" id="menu-switch" value="open" tabindex="-1" role="switch" aria-checked="false">
 </nav>
-
 </body>
 </html>

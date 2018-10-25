@@ -1,72 +1,38 @@
 {{ define "main" }}
-{{- /*
-     * Item Type (schema.org)
-     * ======================
-     */ -}}
-{{- $itemtype := "http://schema.org/BlogPosting" }}
-{{- with index .Params.tags 0 }}
-  {{- with . | urlize | printf "/tags/%s" | $.Site.GetPage }}
-    {{- with .Params.itemtype }}
-      {{- $itemtype = . }}
-    {{- end }}
-  {{- end }}
-{{- end }}
-{{- $is_event := eq "http://schema.org/Event" $itemtype }}
-{{- $is_article := in (slice "http://schema.org/BlogPosting" "http://schema.org/Article" "http://schema.org/ScholarlyArticle" "http://schema.org/NewsArticle") $itemtype }}
-{{- /*
-     * Page Ordering
-     * =============
-     */ -}}
-{{- $total := len .CurrentSection.Pages }}
-{{- $position := 0 }}
-{{- range $index, $page := .CurrentSection.Pages }}
-  {{- if eq $page $ }}
-    {{- $position = $index }}
-  {{- end }}
-{{- end }}
-  <main itemscope itemtype="{{ $itemtype }}">
-    {{- with .Params.feature_image }}
-      {{- with $.Resources.GetMatch . }}
-    <meta itemprop="image" content="{{ .Permalink }}">
-      {{- end }}
-    {{- end }}
-    {{- range $itemprop, $content := .Params.meta }}
-    <meta itemprop="{{ $itemprop }}" content="{{ $content }}">
-    {{- end }}
+  <main>
     <article class="rows">
       <header id="header" class="main-column {{ partial "content-class.html" . }}"{{ with .Params.feature_image }} style="background-image: url('{{ . }}');"{{ end }}>
-        <h1 class="headline" itemprop="name{{ if not $is_event }} headline{{ end }}">{{ .Title }}</h1>
+        <h1 class="headline">{{ .Title }}</h1>
         <div class="meta">
           {{- if .Params.people }}
           <span class="authors">{{ partial "taxonomy-links.html" (dict "Site" .Site "Params" .Params "taxonomy" "people") }}</span>
           <span class="divider">|</span>
           {{- end }}
-          <time class="date" datetime="{{ .Date.Format "2006-01-02" }}" itemprop="{{ cond $is_event "startDate" "datePublished" }}">{{ .Date.Format "2 Jan 2006"}}</time>
+          <time class="date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 Jan 2006"}}</time>
         </div>
       </header>
       <div id="squealer"></div>
       <div id="main" class="main-column {{ partial "content-class.html" . }}">
-        <div class="content" itemprop="description{{ if $is_article }} articleBody{{ end }}">
+        <div class="content">
           {{ .Content }}
         </div>
         <div class="info">
-          <div class="tags" itemprop="keywords">
+          <div class="tags">
             {{- partial "taxonomy-links.html" (dict "Site" .Site "Params" .Params "taxonomy" "tags" "separator" " " "template" "button") -}}
           </div>
-          <aside class="social" itemprop="potentialAction" itemscope itemtype="http://schema.org/CommunicateAction">
-            <a class="twitter" href="https://twitter.com/share?text={{ .Title }}&url={{ .Permalink }}" target="_blank" rel="noopener external nofollow noreferrer" referrerpolicy="no-referrer" itemprop="target">
+          <aside class="social">
+            <a class="twitter" href="https://twitter.com/share?text={{ .Title }}&url={{ .Permalink }}" target="_blank" rel="noopener external nofollow noreferrer" referrerpolicy="no-referrer">
               <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
             </a>
-            <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink }}" target="_blank" rel="noopener external nofollow noreferrer" referrerpolicy="no-referrer" itemprop="target">
+            <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink }}" target="_blank" rel="noopener external nofollow noreferrer" referrerpolicy="no-referrer">
               <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
             </a>
-            <a class="googleplus" href="https://plus.google.com/share?url={{ .Permalink }}" target="_blank" rel="noopener external nofollow noreferrer" referrerpolicy="no-referrer" oitemprop="target">
+            <a class="googleplus" href="https://plus.google.com/share?url={{ .Permalink }}" target="_blank" rel="noopener external nofollow noreferrer" referrerpolicy="no-referrer">
               <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
             </a>
           </aside>
         </div>
         {{- with .Params.people }}
-          {{- $.Scratch.Set "itemprop" (cond $is_event "contributor" "author") }}
           {{- if ge (len .) 2 }}
         <footer class="multiple-authors">
           <p class="note">{{ i18n "ThisPostWasACollaboration" }}</p>
@@ -79,7 +45,6 @@
           {{ .Render "summary" }}
             {{- end }}
           {{- end }}
-          {{- $.Scratch.Delete "itemprop" }}
         {{- end }}
         {{- /*
         <section class="comments">
@@ -89,30 +54,27 @@
         */}}
       </div>
     </article>
-    <nav id="links" class="main-column {{ partial "content-class.html" . }}" itemscope itemtype="http://schema.org/SiteNavigationElement">
-      <ul class="nav" itemscope itemtype="http://schema.org/ItemList">
-        <meta itemprop="numberOfItems" content="{{ $total }}">
+    <nav id="links" class="main-column {{ partial "content-class.html" . }}">
+      <ul class="nav" >
         {{- with .PrevInSection }}
-        <li class="previous" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-          <meta itemprop="position" content="{{ add $position 1 }}">
-          <a href="{{ .RelPermalink }}" rel="prev" itemprop="url">
+        <li class="previous">
+          <a href="{{ .RelPermalink }}" rel="prev">
             <section class="teaser">
               <i class="ic ic-arrow-left"></i>
-              <h2 class="headline" itemprop="name">{{ .Title }}</h2>
-              <p class="excerpt" itemprop="description">{{ .Description | default .Summary | truncate 150 }}</p>
+              <h2 class="headline">{{ .Title }}</h2>
+              <p class="excerpt">{{ .Description | default .Summary | truncate 150 }}</p>
             </section>
           </a>
         {{- else }}
         <li class="previous">
         {{- end }}
         {{- with .NextInSection }}
-        <li class="next" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-          <meta itemprop="position" content="{{ sub $position 1 }}">
-          <a href="{{ .RelPermalink }}" rel="next" itemprop="url">
+        <li class="next">
+          <a href="{{ .RelPermalink }}" rel="next">
             <section class="teaser">
               <i class="ic ic-arrow-right"></i>
-              <h2 class="headline" itemprop="name">{{ .Title }}</h2>
-              <p class="excerpt" itemprop="description">{{ .Description | default .Summary | truncate 150 }}</p>
+              <h2 class="headline">{{ .Title }}</h2>
+              <p class="excerpt">{{ .Description | default .Summary | truncate 150 }}</p>
             </section>
           </a>
         {{- else }}

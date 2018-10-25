@@ -1,36 +1,27 @@
-{{- $itemtype := "http://schema.org/BlogPosting" -}}
-{{- with index .Params.tags 0 -}}
-  {{- with . | urlize | printf "/tags/%s" | $.Site.GetPage -}}
-    {{- with .Params.itemtype -}}
-      {{- $itemtype = . -}}
-    {{- end -}}
-  {{- end -}}
-{{- end -}}
-{{- $is_event := eq "http://schema.org/Event" $itemtype -}}
 {{- $show_link := .Scratch.Get "show_link" | default 1 -}}
-          <article class="{{ partial "content-class.html" . }} rows summary" itemprop="{{ .Scratch.Get "itemprop" | default "item" }}" itemscope itemtype="{{ $itemtype }}">
+          <article class="{{ partial "content-class.html" . }} rows summary">
             <header>
-              <h2 class="headline" itemprop="name{{ if not $is_event }} headline{{ end }}">
+              <h2 class="headline">
                 {{- if $show_link  }}
-                <a href="{{ .RelPermalink }}" itemprop="url">{{ .Title }}</a>
+                <a href="{{ .RelPermalink }}">{{ .Title }}</a>
                 {{- else }}{{ .Title }}{{ end }}
               </h2>
             </header>
             {{- with .Description | default (.Summary | truncate 220) }}
               {{- if $show_link }}
-            <blockquote class="excerpt" cite="{{ $.RelPermalink }}" itemprop="description">
+            <blockquote class="excerpt" cite="{{ $.RelPermalink }}">
               <p>{{ . }}
             </blockquote>
               {{- else }}
-            <div class="excerpt" itemprop="description">
+            <div class="excerpt">
               <p>{{ . }}
             </div>
               {{- end }}
             {{- end }}
             <footer class="meta">
               {{ if .Params.people }}{{- partial "taxonomy-links.html" (dict "Site" .Site "Params" .Params "taxonomy" "people") -}}{{ end }}
-              {{ if .Params.tags }}{{ i18n "On" }} <span itemprop="keywords">{{- partial "taxonomy-links.html" (dict "Site" .Site "Params" .Params "taxonomy" "tags") -}}</span>{{ end }}
+              {{ if .Params.tags }}{{ i18n "On" }} {{- partial "taxonomy-links.html" (dict "Site" .Site "Params" .Params "taxonomy" "tags") -}}{{ end }}
               <span class="divider">|</span>
-              <time datetime="{{ .Date.Format "2006-01-02" }}" itemprop="{{ cond $is_event "startDate" "datePublished" }}">{{ .Date.Format "2 Jan 2006"}}</time>
+              <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 Jan 2006"}}</time>
             </footer>
           </article>

@@ -1,0 +1,8 @@
+{
+  "@context": "https://schema.org",
+  {{- block "main" . }}{{- end }}
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ .Site.BaseURL }}"
+  }
+}

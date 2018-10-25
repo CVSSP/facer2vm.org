@@ -1,0 +1,11 @@
+{{- /*
+     * A place / location.
+     *
+     * Input is a string.
+     */ -}}
+  {
+    {{- range $k, $v := . }}
+    "{{ $k }}": {{ $v | jsonify }},
+    {{- end }}
+    "@type": "Place"
+  }

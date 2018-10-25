@@ -1,0 +1,23 @@
+{{- $images := slice }}
+{{- range $i, $k := slice "profile_image" "feature_image" }}
+  {{- with index $.Params $k }}
+    {{- with $.Resources.GetMatch . }}
+      {{- $images = $images | append .Permalink }}
+    {{- else }}
+      {{- $images = $images | append (. | absURL) }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+{{- if not (len $images) }}
+  {{- with .Scratch.Get "default_image" }}
+    {{- with $.Resources.GetMatch . }}
+      {{- $images = .Permalink }}
+    {{- else }}
+      {{- $images = . | absURL }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+
+  {{- with $images }}
+  "image": {{ . | jsonify }},
+  {{- end }}

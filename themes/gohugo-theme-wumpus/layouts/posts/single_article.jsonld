@@ -1,0 +1,16 @@
+{{- .Scratch.Set "default_image" (.Param "feature_image") }}
+  "@type": "{{ .Scratch.Get "itemtype" | default "Article" }}",
+  {{- partial "id.jsonld" . }}
+  "name": "{{ .Title }}",
+  {{- partial "description.jsonld" . }}
+  {{- partial "image.jsonld" . }}
+  {{- partial "url.jsonld" . }}
+  "headline": "{{ .Title }}",
+  {{- partial "author.jsonld" . }}
+  "datePublished": "{{ .PublishDate.Format "2006-01-02" }}",
+  "dateModified": "{{ .Lastmod.Format "2006-01-02" }}",
+  {{- partial "publisher.jsonld" . }}
+  {{- partial "keywords.jsonld" . }}
+  {{- partial "articleBody.jsonld" . }}
+  {{- partial "params.meta.jsonld" . }}
+{{- .Scratch.Delete "default_image" }}

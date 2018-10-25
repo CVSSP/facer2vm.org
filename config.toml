@@ -8,6 +8,7 @@ defaultContentLanguage = "en"
 paginate = 10
 summaryLength = 35
 #rssLimit = 15
+enableGitInfo = true
 
 #googleAnalytics = "UA-127414679-1"
 
@@ -19,7 +20,7 @@ summaryLength = 35
 
 [params]
   description = "Face Matching for Automatic Identity Retrieval, Recognition, Verification and Management"
-  #favicon = "this.png"
+  favicon = "favicon"
   feature_image = "/images/masthead-dark.jpg"
   # The twitter param is optional, for use in the 404.html to contact you :)
   twitter = "@Paul_Koppen"
@@ -29,6 +30,26 @@ summaryLength = 35
   [languages.en]
     languageName = "English"
     weight = 1
+
+
+# Adds the JSON-LD media type.
+
+[mediaTypes]
+  [mediaTypes."application/ld+json"]
+    suffixes = ["jsonld"]
+
+[outputFormats]
+  [outputFormats.JSONLD]
+    baseName = "index"
+    isPlainText = true
+    mediaType = "application/ld+json"
+
+[outputs]
+  page = ["HTML", "JSONLD"]
+  home = ["HTML", "RSS", "JSONLD"]
+  section = ["HTML", "RSS", "JSONLD"]
+  taxonomyTerm = ["HTML", "RSS", "JSONLD"]
+  taxonomy = ["HTML", "RSS", "JSONLD"]
 
 
 [menu]

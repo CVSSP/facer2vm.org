@@ -1,0 +1,7 @@
+{{- /* `.Permalink` always points to the first page in the paginator
+     * (but we hide it on the front page, per Attila theme).
+     */}}
+
+  {{- if not .IsHome }}
+  "@id": "{{ .Permalink }}",
+  {{- end }}

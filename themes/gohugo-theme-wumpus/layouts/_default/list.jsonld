@@ -1,0 +1,23 @@
+{{- /*
+     * Lists of tags, posts, people, companies and groups,
+     * also lists of posts for a given tag, person or group,
+     * and also the front page.
+     */}}
+
+{{ define "main" }}
+  "@type": "{{- cond .IsHome "WebSite" "CollectionPage" -}}",
+  {{- partial "id.jsonld" . }}
+  {{- partial "publisher.jsonld" . }}
+  "name": "{{ .Title }}",
+  "headline": "{{ .Title }}",
+  {{- partial "description.jsonld" . }}
+  {{- partial "image.jsonld" . }}
+  {{- partial "keywords.jsonld" . }}
+  {{- partial "url.jsonld" . }}
+  {{- $pages := cond .IsHome (where .Pages "Type" "posts") .Pages }}
+  {{- /* $pages := where $pages "Params.has_page" "!=" false */}}
+  {{- /*
+       * No pagination, just dump all items.
+       */}}
+  "about": {{- partial "ItemList.jsonld" $pages }},
+{{- end }}

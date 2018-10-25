@@ -1,0 +1,18 @@
+{{- /*
+     * Under the "about" property, adds a ItemList populated with
+     * references to the pages.
+     *
+     * Input is a list of pages.
+     */}}
+  "about": {
+    "@type": "ItemList",
+    "itemListElement": [
+      {{- range $i, $item := . }}
+      {{ if $i }}, {{ end }}{
+        "@type": "ListItem",
+        "position": {{ add $i 1 }},
+        "url": "{{ $item.Permalink }}"
+      }
+      {{- end }}
+    ]
+  },

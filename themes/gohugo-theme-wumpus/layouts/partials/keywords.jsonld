@@ -1,0 +1,3 @@
+  {{- with .Params.tags }}
+  "keywords": "{{ delimit . ", " }}",
+  {{- end }}

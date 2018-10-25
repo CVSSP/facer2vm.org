@@ -1,32 +1,26 @@
 {{ define "main" }}
 {{- $pages := cond .IsHome (where .Pages "Type" "posts") .Pages }}
 {{- $paginator := .Paginate $pages }}
-{{- $offset := mul $paginator.PageSize (sub $paginator.PageNumber 1) }}
-  <main itemscope itemtype="http://schema.org/CollectionPage">
+  <main>
     <article class="rows">
       <header id="header" class="main-column {{ partial "content-class.html" . }}"{{ with (cond .IsHome .Site.Params.feature_image .Params.feature_image) }} style="background-image: url('{{ . }}');"{{ end }}>
-        {{- with .Params.feature_image }}
-        <meta itemprop="image primaryImageOfPage" content="{{ . }}">
-        {{- end }}
-        <h1 class="headline" itemprop="name headline">{{ .Title }}</h1>
-        <span class="description">{{ if .IsHome }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ else }}{{ partial "num-pages.html" $pages }}{{ end }}</span>
+        <h1 class="headline">{{ .Title }}</h1>
+        <span class="description">{{ if .IsHome }}{{ with .Description }}{{ . }}{{ end }}{{ else }}{{ partial "num-pages.html" $pages }}{{ end }}</span>
       </header>
       <div id="squealer"></div>
       <div id="main" class="main-column {{ partial "content-class.html" . }}">
         {{- with .Content }}
-        <div class="content" itemprop="text">
+        <div class="content">
           {{ . }}
         </div>
         {{- end }}
       </div>
     </article>
-    <nav id="links" class="main-column {{ partial "content-class.html" . }}" itemscope itemtype="http://schema.org/SiteNavigationElement">
+    <nav id="links" class="main-column {{ partial "content-class.html" . }}">
       {{- if $paginator.TotalNumberOfElements }}
-      <ul class="list" itemscope itemtype="http://schema.org/ItemList">
-        <meta itemprop="numberOfItems" content="{{ $paginator.TotalNumberOfElements }}">
+      <ul class="list">
         {{- range $index, $page := $paginator.Pages }}
-        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-          <meta itemprop="position" content="{{ add $offset $index }}">
+        <li>
           {{- .Scratch.Set "show_link" (.Params.has_page | default 1) }}
           {{- .Scratch.Set "show_stats" (ne $.Kind "taxonomyTerm") }}
           {{ .Render "summary" }}

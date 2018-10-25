@@ -1,0 +1,18 @@
+{{- $logo := "" }}
+{{- with .Site.Params.logo }}
+  {{- $logo = . }}
+{{- else }}
+  {{- with .Site.Params.favicon }}
+    {{- $logo = printf "/%s-192x192.png" . }}
+  {{- end }}
+{{- end }}
+  "publisher": {
+    "@type": "Organization",
+    {{- with $logo }}
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ . | absURL }}"
+    },
+    {{- end }}
+    "name": "{{ .Site.Title }}"
+  },

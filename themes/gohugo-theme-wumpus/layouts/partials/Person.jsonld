@@ -1,0 +1,17 @@
+{{- if .Params -}}
+  {
+    "@type": "Person",
+    {{- partial "id.jsonld" . }}
+    {{- partial "image.jsonld" . }}
+    {{- partial "url.jsonld" . }}
+    {{- with .Params.prefix }}
+    "honorificPrefix": "{{ . }}",
+    {{- end }}
+    "name": "{{ .Params.name }}"
+  }
+{{- else -}}
+  {
+    "@type": "Person",
+    "name": {{ .name | jsonify }}
+  }
+{{- end }}
