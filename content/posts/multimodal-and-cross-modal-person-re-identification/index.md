@@ -1,6 +1,7 @@
 ---
 title: Multimodal and Cross-modal Person Re-identification
 date: 2018-10-19T12:00:55+01:00
+feature_image: feature_image.jpg
 tags:
   - Publications
 people:
