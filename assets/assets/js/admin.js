@@ -27,10 +27,15 @@ A TemplateBuilder, defines a Template and offers configuration to bind its
             let v = []
 
             this.fields.forEach(function(field, i) {
-                v.push(strings[i] + field.toString())
+                v.push(strings[i])
+                v.push(field.toString())
             })
             v.push(strings[strings.length - 1])
             return v.join('')
+        }
+
+        static build(strings, ...fields) {
+            return new Template(strings, ...fields)
         }
     }
 
@@ -102,54 +107,73 @@ A TemplateBuilder, defines a Template and offers configuration to bind its
         }
     }
 
-    class TemplateBuilder {
-        build(strings, ...fields) {
-            return new Template(strings, ...fields)
-        }
+    // class Admin {
+        // constructor(template) {
+            // document.body.classList.add('admin')
+            // this.template = template
+            
+            
+            // // For background-image nest a dropTarget, with onlcick file selector.
+            // document.execCommand("defaultParagraphSeparator", false, "p");
+        // }
+    // }
+
+/* ===========================================================================
+   Normal page code
+   =========================================================================== */
+    // TODO: make window.Admin a Promise instead of create.
+
+    if (window.Admin === undefined) {
+        window.Admin = {}
     }
 
-    class PageTemplate extends TemplateBuilder {
-        constructor(config = {}) {
-            super()
-            const default_config = {
-                title: '#header .headline',
-                feature_image: '#header',
-                date: '#header .date',
-                people: '#header .authors',
-                tags: '#main .tags',
-                body: '#main .content',
-            }
-            this.config = {...default_config, ...config}
-        }
+    window.Admin.create = (admin_script = '/assets/js/admin.js') => {
+        const self = this
 
-        build() {
-            const c = this.config
-            return super.build`---
-title: "${new StringField(c.title)}"
-feature_image: "${new BackgroundImageField(c.feature_image)}"
-date: "${new DateField(c.date)}"
-people: ${new ListField(c.people)}
-tags: ${new ListField(c.tags)}
+        const waitForKey = new Promise(resolve => {
+            // Wait for the magic key combo.
+            document.addEventListener('keydown', (event) => {
+                if (event.altKey && event.key === 'e') {
+                    event.preventDefault()
+                    resolve()
+                }
+            })
+        })
+
+        const load = url => new Promise((resolve, reject) => {
+            const script = document.createElement('script')
+            script.setAttribute('src', url)
+            script.addEventListener('load', evt => {
+                resolve(self)
+            })
+            script.addEventListener('error', reject)
+            document.head.appendChild(script)
+        })
+
+        return waitForKey.then(() => load(admin_script))
+    }
+
+/* ===========================================================================
+   Single page code
+   =========================================================================== */
+
+    const admin_src = ''
+
+    window.Admin.create(admin_src)
+    .then(admin => {
+        admin.setup(Template.build`---
+title: "${new StringField('#header .headline')}"
+feature_image: "${new BackgroundImageField('#header')}"
+date: "${new DateField('#header .date')}"
+people: ${new ListField('#header .authors')}
+tags: ${new ListField('#main .tags')}
 ---
 
-${new MarkdownField(c.body)}`
-        }
-    }
-
-    const templates = {
-        'posts': new PageTemplate(),
-        'people': new PageTemplate(),
-        'companies': new PageTemplate(),
-        'groups': new PageTemplate(),
-        'tags': new PageTemplate(),
-    }
-    templates.posts.build()
-
-
-    //setInterval(function(){ console.log(page.toString()) }, 10000)
-
-// For background-image nest a dropTarget, with onlcick file selector.
-document.execCommand("defaultParagraphSeparator", false, "p");
+${new MarkdownField('#main .content')}`)
+    })
+    .catch(err => {
+        console.log('Failed to load the admin.', err)
+    })
 
 
 })(Function('return this')())
