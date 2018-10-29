@@ -143,6 +143,7 @@ ${new MarkdownField(c.body)}`
         'groups': new PageTemplate(),
         'tags': new PageTemplate(),
     }
+    templates.posts.build()
 
 
     //setInterval(function(){ console.log(page.toString()) }, 10000)
