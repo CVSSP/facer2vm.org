@@ -1,6 +1,2 @@
 scss:
   - assets/sass/facer2vm.scss
-js:
-  - assets/js/moment.js
-  - assets/js/turndown.js
-  - assets/js/admin.js

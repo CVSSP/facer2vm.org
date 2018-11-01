@@ -106,4 +106,35 @@
 
     embedJsonLd()
 
+	/* ======================================================================
+	   The Wumpus admin.
+	   ====================================================================== */
+
+    function enableAdminLoader() {
+        var meta = document.querySelector('link[rel="admin"][type="application/javascript"]')
+        var script = document.createElement('script')
+        script.setAttribute('type', 'module')
+        script.setAttribute('src', meta.href)
+        document.head.appendChild(script)
+    }
+
+    function waitForKey(key, callback) {
+        document.addEventListener('keydown', listener)
+
+        function listener(event) {
+            if (isTargetKey(event)) {
+                event.preventDefault()
+                callback()
+                document.removeEventListener('keydown', listener)
+            }
+        }
+        function isTargetKey(event) {
+            return Object.keys(key).every(function(prop) {
+                return event[prop] === key[prop]
+            })
+        }
+    }
+
+    waitForKey({key: 'e', altKey: true}, enableAdminLoader)
+
 })(Function('return this')());

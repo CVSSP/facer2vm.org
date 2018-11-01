@@ -33,19 +33,26 @@ enableGitInfo = true
 
 
 # Adds the JSON-LD media type.
+# and a media type for the admin.
 
 [mediaTypes]
   [mediaTypes."application/ld+json"]
     suffixes = ["jsonld"]
+  [mediaTypes."application/javascript"]
+    suffixes = ["admin.js"]
 
 [outputFormats]
   [outputFormats.JSONLD]
-    baseName = "index"
     isPlainText = true
     mediaType = "application/ld+json"
+  [outputFormats.ADMIN]
+	basename = "wumpus-loader"
+    isPlainText = true
+    mediaType = "application/javascript"
+	rel = "admin"
 
 [outputs]
-  page = ["HTML", "JSONLD"]
+  page = ["HTML", "JSONLD", "ADMIN"]
   home = ["HTML", "RSS", "JSONLD"]
   section = ["HTML", "RSS", "JSONLD"]
   taxonomyTerm = ["HTML", "RSS", "JSONLD"]
