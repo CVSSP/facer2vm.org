@@ -5,6 +5,8 @@ people:
   - Paul Koppen
 tags:
   - Software
+aliases:
+  - /the-surrey-face-model/
 ---
 
 This page is concerned with the availability and downloading of the 3D morphable
